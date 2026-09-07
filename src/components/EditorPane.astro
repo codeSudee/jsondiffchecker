@@ -1,0 +1,70 @@
+---
+interface Props {
+  side: 'left' | 'right';
+  label: string;
+  placeholder?: string;
+}
+
+const { side, label, placeholder = '{\n  "paste": "your JSON here"\n}' } = Astro.props;
+---
+
+<div class="flex min-h-0 flex-1 flex-col" data-pane={side}>
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-hairline bg-canvas-elevated px-3 py-2 sm:px-3">
+    <div class="flex items-center gap-2">
+      <span class="mono-eyebrow">{label}</span>
+      <span data-role="char-count" class="mono-eyebrow text-faint">0 chars</span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5">
+      <button type="button" class="btn-sm" data-action="format" title="Pretty-print">
+        Format
+      </button>
+      <button type="button" class="btn-sm" data-action="upload" title="Upload a .json file">
+        Upload
+      </button>
+      <button type="button" class="btn-sm" data-action="load-url" title="Load JSON from a URL">
+        URL
+      </button>
+      <button type="button" class="btn-sm" data-action="clear" title="Clear">
+        Clear
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="hidden flex-wrap items-center gap-2 border-b border-hairline bg-hairline-soft px-3 py-2"
+    data-role="url-bar"
+  >
+    <input
+      type="url"
+      inputmode="url"
+      placeholder="https://example.com/data.json"
+      class="min-w-0 flex-1 basis-full rounded-sm border border-hairline bg-canvas-elevated px-2 py-1.5 font-mono text-sm text-ink placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-link sm:basis-0"
+      data-role="url-input"
+      aria-label={`Load JSON URL into ${label}`}
+    />
+    <button type="button" class="btn-sm-primary btn-sm" data-action="fetch-url">Load</button>
+    <button type="button" class="btn-sm" data-action="cancel-url">Cancel</button>
+  </div>
+
+  <input type="file" accept=".json,application/json" class="hidden" data-role="file-input" />
+
+  <div class="relative flex min-h-0 flex-1">
+    <textarea
+      class="min-h-0 w-full flex-1 resize-none bg-canvas-elevated px-4 py-3 font-mono text-[13px] leading-[20px] text-ink placeholder:text-faint focus:outline-none"
+      spellcheck="false"
+      autocomplete="off"
+      autocapitalize="off"
+      data-role="editor"
+      aria-label={`${label} JSON input`}
+      placeholder={placeholder}></textarea>
+  </div>
+
+  <div
+    class="hidden items-start gap-2 border-t border-error-soft bg-error-soft px-3 py-2 text-[13px] text-error-deep"
+    data-role="error-banner"
+    role="alert"
+  >
+    <span aria-hidden="true">⚠</span>
+    <span data-role="error-message"></span>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+---
+import Layout from './Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  code: string;
+  heading: string;
+}
+
+const { title, description, code, heading } = Astro.props;
+---
+
+<Layout title={title} description={description} noindex>
+  <SiteHeader />
+  <main id="main-content">
+    <section class="border-b border-hairline bg-canvas py-24 sm:py-32">
+      <div class="mx-auto max-w-2xl px-4 text-center sm:px-6">
+        <p class="mono-eyebrow text-mute">{code}</p>
+        <h1 class="mt-3 text-[28px] font-semibold tracking-[-0.03em] text-ink sm:text-[36px]">
+          {heading}
+        </h1>
+        <div class="mt-4 text-[15px] leading-relaxed text-body">
+          <slot />
+        </div>
+
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 xs:flex-row xs:flex-wrap">
+          <a href="/" class="inline-flex w-full items-center justify-center rounded-pill bg-ink px-5 py-2.5 text-[15px] font-medium text-on-primary hover:opacity-85 xs:w-auto">
+            Go to homepage
+          </a>
+          <a href="/#tool" class="inline-flex w-full items-center justify-center rounded-pill border border-hairline bg-canvas-elevated px-5 py-2.5 text-[15px] font-medium text-ink hover:bg-hairline-soft xs:w-auto">
+            Open the JSON diff tool
+          </a>
+        </div>
+
+        <nav class="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] text-mute" aria-label="Secondary">
+          <a href="/about-us" class="hover:text-ink">About us</a>
+          <a href="/contact-us" class="hover:text-ink">Contact us</a>
+          <a href="/privacy-policy" class="hover:text-ink">Privacy policy</a>
+          <a href="/terms-and-conditions" class="hover:text-ink">Terms and conditions</a>
+        </nav>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</Layout>

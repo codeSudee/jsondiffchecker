@@ -1,0 +1,19 @@
+---
+import EditorPane from './EditorPane.astro';
+import DiffPanel from './DiffPanel.astro';
+---
+
+<div
+  class="flex flex-col overflow-hidden rounded-md border border-hairline bg-canvas-elevated floating-shadow"
+  data-role="diff-checker"
+>
+  <div class="grid min-h-[280px] flex-none grid-cols-1 divide-y divide-hairline md:grid-cols-2 md:divide-x md:divide-y-0">
+    <EditorPane side="left" label="Original JSON" />
+    <EditorPane side="right" label="Updated JSON" />
+  </div>
+  <DiffPanel />
+</div>
+
+<script>
+  import '../scripts/diff-checker';
+</script>

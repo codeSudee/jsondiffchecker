@@ -1,0 +1,139 @@
+---
+---
+
+<header class="sticky top-0 z-20 border-b border-hairline bg-canvas/90 backdrop-blur-sm">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+    <a href="/" class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.02em] text-ink">
+      <span class="flex h-6 w-6 items-center justify-center rounded-sm bg-ink text-[13px] font-semibold text-on-primary">{'{}'}</span>
+      <span class="hidden xs:inline">JSON Diff Checker</span>
+      <span class="xs:hidden">JSON Diff</span>
+    </a>
+    <nav class="hidden items-center gap-1 sm:flex" aria-label="Primary">
+      <a href="/#tool" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">Tool</a>
+      <a href="/#features" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">Features</a>
+      <a href="/#privacy" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">Privacy</a>
+      <a href="/#faq" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">FAQ</a>
+      <a href="/about-us" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">About</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline text-body hover:bg-hairline-soft hover:text-ink"
+        data-action="toggle-theme"
+        aria-label="Toggle dark mode"
+        aria-pressed="false"
+        title="Toggle dark mode"
+      >
+        <svg data-role="theme-icon-dark" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+        </svg>
+        <svg data-role="theme-icon-light" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+        </svg>
+      </button>
+      <a href="/#tool" class="hidden items-center rounded-pill bg-ink px-4 py-2 text-[13px] font-medium text-on-primary hover:opacity-85 sm:inline-flex">
+        Open the tool
+      </a>
+      <button
+        type="button"
+        class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline text-body hover:bg-hairline-soft hover:text-ink sm:hidden"
+        data-action="toggle-menu"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg data-role="menu-icon-open" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg data-role="menu-icon-close" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <nav
+    id="mobile-menu"
+    class="hidden flex-col border-t border-hairline bg-canvas px-4 py-2 sm:hidden"
+    aria-label="Primary"
+    data-role="mobile-menu"
+  >
+    <a href="/#tool" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">Tool</a>
+    <a href="/#features" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">Features</a>
+    <a href="/#privacy" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">Privacy</a>
+    <a href="/#faq" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">FAQ</a>
+    <a href="/about-us" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">About</a>
+    <a href="/#tool" class="my-2 inline-flex items-center justify-center rounded-pill bg-ink px-4 py-2.5 text-[14px] font-medium text-on-primary hover:opacity-85" data-role="mobile-menu-link">
+      Open the tool
+    </a>
+  </nav>
+</header>
+
+<script>
+  import { getStoredTheme, applyTheme, setTheme } from '../scripts/theme';
+
+  function initThemeToggle() {
+    const btn = document.querySelector<HTMLElement>('[data-action="toggle-theme"]');
+    if (!btn) return;
+    const darkIcon = btn.querySelector<SVGElement>('[data-role="theme-icon-dark"]');
+    const lightIcon = btn.querySelector<SVGElement>('[data-role="theme-icon-light"]');
+
+    function syncIcon() {
+      const isDark = document.documentElement.classList.contains('dark');
+      darkIcon?.classList.toggle('hidden', isDark);
+      lightIcon?.classList.toggle('hidden', !isDark);
+      btn?.setAttribute('aria-pressed', String(isDark));
+    }
+
+    syncIcon();
+
+    btn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'light' : 'dark');
+      syncIcon();
+    });
+
+    // Keep in sync if the OS theme changes, but only when the user hasn't
+    // made an explicit choice via the toggle (no stored preference).
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (getStoredTheme() !== null) return;
+      applyTheme(e.matches ? 'dark' : 'light');
+      syncIcon();
+    });
+  }
+
+  function initMobileMenu() {
+    const btn = document.querySelector<HTMLElement>('[data-action="toggle-menu"]');
+    const menu = document.querySelector<HTMLElement>('[data-role="mobile-menu"]');
+    if (!btn || !menu) return;
+    const openIcon = btn.querySelector<SVGElement>('[data-role="menu-icon-open"]');
+    const closeIcon = btn.querySelector<SVGElement>('[data-role="menu-icon-close"]');
+
+    function setOpen(open: boolean) {
+      menu?.classList.toggle('hidden', !open);
+      menu?.classList.toggle('flex', open);
+      btn?.setAttribute('aria-expanded', String(open));
+      btn?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      openIcon?.classList.toggle('hidden', open);
+      closeIcon?.classList.toggle('hidden', !open);
+    }
+
+    btn.addEventListener('click', () => {
+      setOpen(menu.classList.contains('hidden'));
+    });
+
+    menu.querySelectorAll<HTMLElement>('[data-role="mobile-menu-link"]').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initThemeToggle();
+      initMobileMenu();
+    });
+  } else {
+    initThemeToggle();
+    initMobileMenu();
+  }
+</script>

@@ -17,8 +17,17 @@ pnpm-debug.log*
 .env
 .env.production
 
+# wrangler local dev state
+.wrangler/
+
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
+
+# AI agent tooling / skills scaffolding
+.kiro/
+.agents/
+DESIGN.md
+skills-lock.json

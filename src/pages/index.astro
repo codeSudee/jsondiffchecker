@@ -1,11 +1,162 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Hero from '../components/Hero.astro';
+import ToolSection from '../components/ToolSection.astro';
+import Features from '../components/Features.astro';
+import Privacy from '../components/Privacy.astro';
+import About from '../components/About.astro';
+import Faq from '../components/Faq.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = 'JSON Diff Checker — Compare JSON Online Free | JSON Diff Tool';
+const description =
+  'Free JSON diff checker to compare two JSON files or objects online. Highlights added, removed, and changed keys instantly — no upload, no sign-up, 100% private in your browser.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'JSON Diff Checker',
+  alternateName: ['JSON Diff Tool', 'JSON Comparison Tool', 'JSON Compare Tool'],
+  url: 'https://jsondiffchecker.com',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description:
+    'Compare two JSON documents in your browser. Highlights added, removed, and changed keys with no data ever leaving your machine.',
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is my JSON data uploaded anywhere?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. All parsing, validation, and comparison happens in your browser using JavaScript. There is no backend that receives your JSON.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does it matter if key order is different?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. The comparison is semantic rather than textual — keys are matched by name regardless of order.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I compare JSON files with different array orders?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Turn on "Ignore array order" to compare arrays by value instead of position, matching elements by an id/uuid/key field when available.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens if my JSON is invalid?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "You'll see a clear error message with the exact line and column where parsing failed.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How large a file can I compare?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Performance depends on your browser and device, since everything runs locally. The tool stays responsive with deeply nested and large documents via collapsible tree nodes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I download or share the result?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. You can copy the diff as a JSON Patch (RFC 6902) or download it as a JSON Patch file or a Markdown changelog.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How to check if JSON is correct?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Paste your JSON into either editor — it's validated as you type. Invalid JSON shows an error with the exact line and column of the problem; if it parses cleanly, it's valid.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is Diffchecker free to use?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'This JSON diff checker is completely free, with no sign-up and no data uploaded to a server — comparisons run entirely in your browser.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How to check the difference between two JSON files?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Paste each file\'s contents into the left and right editors and the tool highlights added, removed, and changed keys line by line. Enable "Ignore array order" if array position should not count as a difference.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I use jsondiff in Python?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Install the jsondiff package with pip install jsondiff, then call jsondiff.diff(a, b) on two parsed JSON objects to get a dict describing the differences. For quick visual comparisons without writing code, use this tool instead.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between two JSON files called?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'It is commonly called a JSON diff or JSON delta. A standardized format for expressing it is JSON Patch (RFC 6902), which this tool can generate.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I compare two JSON objects?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Paste one object into each editor. Objects are compared key by key, so they are equal if they have the same keys and values regardless of key order, with any differences highlighted.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can you diff JSON files?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes — paste the contents of both files into the two editors and differences are highlighted instantly, entirely in your browser with no upload.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do you check if two JSON objects are the same?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Compare them with this tool: if the diff view shows no added, removed, or changed entries, the objects are equivalent. Key order does not matter unless array order is also relevant.',
+      },
+    },
+  ],
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={title} description={description}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+  <SiteHeader />
+  <main id="main-content">
+    <Hero />
+    <ToolSection />
+    <Features />
+    <Privacy />
+    <About />
+    <Faq />
+  </main>
+  <SiteFooter />
 </Layout>

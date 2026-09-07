@@ -1,0 +1,40 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const title = 'Contact Us | JSON Diff Checker';
+const description =
+  'Get in touch with the JSON Diff Checker team for feedback, bug reports, or feature requests.';
+
+const contactEmail = 'support@jsondiffchecker.com';
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  eyebrow="Contact us"
+  heading="Contact Us"
+>
+  <p>
+    We'd love to hear from you — whether it's a bug report, a feature request, or general feedback about
+    JSON Diff Checker.
+  </p>
+
+  <h2>Email</h2>
+  <p>
+    The fastest way to reach us is by email at
+    {' '}<a href={`mailto:${contactEmail}`}>{contactEmail}</a>. We generally respond within a few business days.
+  </p>
+
+  <h2>Reporting a bug</h2>
+  <p>
+    If you've found a bug, it helps to include the JSON you were comparing (or a minimal example that
+    reproduces the issue), the browser and OS you're using, and a description of what you expected to
+    happen versus what actually happened.
+  </p>
+
+  <h2>Feature requests</h2>
+  <p>
+    Have an idea for a feature that would make comparing JSON easier? Send it our way — we read every
+    suggestion, even if we can't respond to or implement all of them.
+  </p>
+</PageLayout>

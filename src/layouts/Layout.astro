@@ -1,23 +1,104 @@
+---
+import '@fontsource/geist-sans/400.css';
+import '@fontsource/geist-sans/500.css';
+import '@fontsource/geist-sans/600.css';
+import '@fontsource/geist-mono/400.css';
+import '@fontsource/geist-mono/500.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'JSON Diff Checker — Compare JSON Online Free | JSON Diff Tool',
+  description = 'Free JSON diff checker to compare two JSON files or objects online. Our JSON comparison tool highlights added, removed, and changed keys instantly — no upload, no sign-up, 100% private in your browser.',
+  ogImage = '/web-app-manifest-512x512.png',
+  noindex = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="JSON Diff" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="canonical" href={canonicalURL} />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta
+			name="keywords"
+			content="JSON diff checker, json diff checker online, compare json online, json diff tool, compare two json files, json comparison tool, json diff viewer, compare json objects online, free json diff checker, json compare tool, json diff checker online free, compare json files online, json diff generator, online json comparison, json diff and merge tool, compare json data, json difference checker, json diff checker free"
+		/>
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+		<meta name="author" content="JSON Diff Checker" />
+		<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+
+		<!-- Google AdSense -->
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6778789012514648" crossorigin="anonymous"></script>
+
+		<script is:inline>
+			// Runs synchronously, before first paint, to avoid a light-mode flash
+			// when the stored/OS preference is dark. Keep in sync with
+			// src/scripts/theme.ts (kept duplicated here since inline scripts
+			// can't import modules and must not be deferred).
+			(function () {
+				try {
+					var stored = localStorage.getItem('theme');
+					var isDark = stored === 'dark' || (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+					if (isDark) document.documentElement.classList.add('dark');
+				} catch (e) {}
+			})();
+		</script>
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="JSON Diff Checker" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:image:width" content="512" />
+		<meta property="og:image:height" content="512" />
+		<meta property="og:image:alt" content="JSON Diff Checker — compare JSON online" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageURL} />
+		<meta name="twitter:image:alt" content="JSON Diff Checker — compare JSON online" />
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-PFCGC28LF1"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+
+			gtag('config', 'G-PFCGC28LF1');
+		</script>
 	</head>
-	<body>
+	<body class="bg-canvas text-ink antialiased">
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-ink focus:px-3 focus:py-2 focus:text-on-primary">
+			Skip to content
+		</a>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

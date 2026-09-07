@@ -1,0 +1,13 @@
+---
+import ErrorLayout from '../layouts/ErrorLayout.astro';
+
+const title = '500 — Server Error | JSON Diff Checker';
+const description = 'Something went wrong on our end. Please try again in a moment.';
+---
+
+<ErrorLayout title={title} description={description} code="500" heading="Something went wrong">
+  <p>
+    An unexpected error occurred while loading this page. This tool runs entirely in your browser, so
+    trying again or reloading the page usually resolves the issue.
+  </p>
+</ErrorLayout>

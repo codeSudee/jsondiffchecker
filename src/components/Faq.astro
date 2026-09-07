@@ -1,0 +1,83 @@
+---
+const faqs = [
+  {
+    q: 'Is my JSON data uploaded anywhere?',
+    a: 'No. All parsing, validation, and comparison happens in your browser using JavaScript. There is no backend that receives your JSON — you can verify this yourself by opening your browser\'s developer tools, going to the Network tab, and watching for requests while you compare data.',
+  },
+  {
+    q: 'Does it matter if key order is different?',
+    a: 'No. The comparison is semantic rather than textual — keys are matched by name regardless of order, so { "a": 1, "b": 2 } and { "b": 2, "a": 1 } are treated as identical.',
+  },
+  {
+    q: 'Can I compare JSON files with different array orders?',
+    a: 'Yes. By default, array order matters — comparing ["a","b"] with ["b","a"] shows both entries as changed, since order often carries meaning (e.g. sorted lists). Turn on "Ignore array order" above the diff result to compare arrays by value instead: elements are matched by an id/uuid/key field when objects have one, or by value otherwise, so reordering alone is no longer reported — only elements that were genuinely added, removed, or actually changed.',
+  },
+  {
+    q: 'What happens if my JSON is invalid?',
+    a: "You'll see a clear error message with the exact line and column where parsing failed, so you can fix syntax errors like missing commas, unquoted keys, or trailing commas immediately.",
+  },
+  {
+    q: 'How large a file can I compare?',
+    a: 'Performance depends on your browser and device, since everything runs locally. The tool is built to stay responsive with deeply nested and large documents by rendering the diff tree with collapsible nodes.',
+  },
+  {
+    q: 'Can I download or share the result?',
+    a: 'Yes. You can copy the diff as a JSON Patch (RFC 6902) or download it as a JSON Patch file or a human-readable Markdown changelog — useful for pull requests, bug reports, or documentation.',
+  },
+  {
+    q: 'How to check if JSON is correct?',
+    a: 'Paste your JSON into either editor on this page — it is validated as you type. If the JSON is invalid, you\'ll see an error message with the exact line and column of the problem (e.g. a missing comma, unquoted key, or trailing comma). If it parses cleanly, it\'s valid JSON.',
+  },
+  {
+    q: 'Is Diffchecker free to use?',
+    a: 'This JSON diff checker is completely free to use, with no sign-up, no usage limits, and no data uploaded to a server — comparisons run entirely in your browser. (Diffchecker.com is a separate, third-party service; we are not affiliated with it.)',
+  },
+  {
+    q: 'How to check the difference between two JSON files?',
+    a: "Open each file's contents and paste them into the left and right editors above, then click Compare (or let it diff automatically). Added, removed, and changed keys are highlighted line by line, and you can enable \"Ignore array order\" if array ordering shouldn't count as a difference.",
+  },
+  {
+    q: 'How do I use jsondiff in Python?',
+    a: 'In Python, the popular option is the `jsondiff` package: install it with `pip install jsondiff`, then call `jsondiff.diff(a, b)` where `a` and `b` are parsed JSON objects (dicts). It returns a dict describing what changed. This is useful for scripting or CI checks — for quick, visual, one-off comparisons without writing code, use the tool on this page instead.',
+  },
+  {
+    q: 'What is the difference between two JSON files called?',
+    a: 'It\'s commonly called a "JSON diff" or "JSON delta" — a structured description of what was added, removed, or changed between two JSON documents. A standardized format for expressing it is JSON Patch (RFC 6902), which this tool can generate for you.',
+  },
+  {
+    q: 'How do I compare two JSON objects?',
+    a: 'Paste one object into each editor above. The comparison is done key by key (not as plain text), so objects are considered equal if they have the same keys and values regardless of key order, while any added, removed, or changed values are highlighted.',
+  },
+  {
+    q: 'Can you diff JSON files?',
+    a: 'Yes — paste the contents of both files into the two editors on this page and the differences are highlighted instantly. Everything runs client-side in your browser, so no file is uploaded anywhere.',
+  },
+  {
+    q: 'How do you check if two JSON objects are the same?',
+    a: 'Compare them with this tool: if the diff view shows no added, removed, or changed entries, the objects are equivalent. Two JSON objects are considered the same when they contain the same keys and values, even if the keys appear in a different order — only array order matters unless you enable "Ignore array order".',
+  },
+];
+---
+
+<section id="faq" class="bg-canvas py-20 sm:py-28">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6">
+    <div class="text-center">
+      <p class="mono-eyebrow mb-3">FAQ</p>
+      <h2 class="text-[28px] font-semibold tracking-[-0.03em] text-ink sm:text-[36px]">
+        Common questions
+      </h2>
+    </div>
+
+    <div class="mt-10 divide-y divide-hairline border-y border-hairline">
+      {faqs.map((item) => (
+        <details class="group py-4">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-medium text-ink">
+            {item.q}
+            <span class="shrink-0 text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-3 text-[14px] leading-relaxed text-body">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
