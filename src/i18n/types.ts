@@ -80,6 +80,47 @@ export interface FaqContent {
   items: FaqItem[];
 }
 
+export interface GuideStep {
+  title: string;
+  body: string;
+}
+
+export interface GuideExampleRow {
+  /** JSON Pointer-style path shown for the row, e.g. version or user.roles[1] */
+  path: string;
+  /** Human explanation of what changed at this path and why the tool flags it this way */
+  note: string;
+  /** added | removed | changed — used to color the row the same way the live tool does */
+  type: 'added' | 'removed' | 'changed';
+}
+
+export interface GuideContent {
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  steps: GuideStep[];
+  exampleHeading: string;
+  exampleIntro: string;
+  exampleLeftLabel: string;
+  exampleRightLabel: string;
+  exampleLeftJson: string;
+  exampleRightJson: string;
+  exampleRows: GuideExampleRow[];
+  exampleOutro: string;
+}
+
+export interface UseCase {
+  title: string;
+  body: string;
+}
+
+export interface UseCasesContent {
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  items: UseCase[];
+}
+
 export interface EditorContent {
   originalLabel: string;
   updatedLabel: string;
@@ -140,7 +181,6 @@ export interface FooterContent {
   privacyPolicy: string;
   terms: string;
   copyright: string; // may contain {year} placeholder
-  notAffiliated: string;
 }
 
 export interface LegalSection {
@@ -172,6 +212,8 @@ export interface SiteContent {
   features: FeaturesContent;
   privacy: PrivacySectionContent;
   about: AboutContent;
+  guide: GuideContent;
+  useCases: UseCasesContent;
   faq: FaqContent;
   editor: EditorContent;
   diffPanel: DiffPanelContent;

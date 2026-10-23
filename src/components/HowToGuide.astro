@@ -1,0 +1,70 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+const g = t.guide;
+
+const rowClass: Record<'added' | 'removed' | 'changed', string> = {
+  added: 'bg-diff-added-soft text-diff-added',
+  removed: 'bg-diff-removed-soft text-diff-removed',
+  changed: 'bg-diff-changed-soft text-diff-changed',
+};
+const rowMarker: Record<'added' | 'removed' | 'changed', string> = {
+  added: '+',
+  removed: '\u2212',
+  changed: '~',
+};
+---
+
+<section id="guide" class="border-b border-hairline bg-canvas py-20 sm:py-28">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="text-center">
+      <p class="mono-eyebrow mb-3">{g.eyebrow}</p>
+      <h2 class="text-[28px] font-semibold tracking-[-0.03em] text-ink sm:text-[36px]">
+        {g.heading}
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-body">{g.intro}</p>
+    </div>
+
+    <ol class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {g.steps.map((step) => (
+        <li class="card p-5">
+          <h3 class="text-[15px] font-semibold text-ink">{step.title}</h3>
+          <p class="mt-1.5 text-[14px] leading-relaxed text-body">{step.body}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-16">
+      <h3 class="text-[20px] font-semibold tracking-[-0.02em] text-ink">{g.exampleHeading}</h3>
+      <p class="mt-2 max-w-2xl text-[14px] leading-relaxed text-body">{g.exampleIntro}</p>
+
+      <div class="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-md border border-hairline sm:grid-cols-2">
+        <div class="bg-canvas-elevated">
+          <p class="mono-eyebrow border-b border-hairline px-3 py-2">{g.exampleLeftLabel}</p>
+          <pre class="overflow-auto px-4 py-3 font-mono text-[12px] leading-[20px] text-body sm:text-[13px]">{g.exampleLeftJson}</pre>
+        </div>
+        <div class="bg-canvas-elevated">
+          <p class="mono-eyebrow border-b border-hairline px-3 py-2">{g.exampleRightLabel}</p>
+          <pre class="overflow-auto px-4 py-3 font-mono text-[12px] leading-[20px] text-body sm:text-[13px]">{g.exampleRightJson}</pre>
+        </div>
+      </div>
+
+      <div class="mt-4 divide-y divide-hairline overflow-hidden rounded-md border border-hairline">
+        {g.exampleRows.map((row) => (
+          <div class={`flex items-start gap-3 px-4 py-3 text-[13px] ${rowClass[row.type]}`}>
+            <span class="w-3 shrink-0 select-none text-center font-mono" aria-hidden="true">{rowMarker[row.type]}</span>
+            <span class="min-w-0 flex-1">
+              <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[12px] text-ink">{row.path}</code>
+              <span class="ml-2 text-body">{row.note}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-4 text-[14px] leading-relaxed text-body">{g.exampleOutro}</p>
+    </div>
+  </div>
+</section>

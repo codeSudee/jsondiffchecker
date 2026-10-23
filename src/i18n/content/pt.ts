@@ -2,9 +2,9 @@ import type { SiteContent } from '../types';
 
 export const pt: SiteContent = {
   meta: {
-    homeTitle: 'JSON Diff Checker — Compare JSON Online Grátis | Ferramenta de Diff JSON',
+    homeTitle: 'JSON Diff Checker — Compare Dois Arquivos JSON no Seu Navegador',
     homeDescription:
-      'Verificador de diff JSON gratuito para comparar dois arquivos ou objetos JSON online. Destaca chaves adicionadas, removidas e alteradas instantaneamente — sem upload, sem cadastro, 100% privado no seu navegador.',
+      'Cole, envie ou carregue dois documentos JSON e veja exatamente o que mudou — chaves adicionadas, chaves removidas e valores alterados, destacados em uma árvore recolhível. Executa inteiramente no seu navegador.',
   },
   nav: {
     brand: 'JSON Diff Checker',
@@ -81,8 +81,8 @@ export const pt: SiteContent = {
         body: 'A análise, a validação e a comparação são executadas no seu navegador com JavaScript puro. Seu JSON nunca é transmitido a lugar nenhum.',
       },
       {
-        label: 'Sem analytics, sem scripts de anúncios',
-        body: 'Esta página não carrega rastreadores de terceiros nem tags de anúncios — verifique a aba de rede do seu navegador e você não verá nada além da própria página.',
+        label: 'Processamento no navegador',
+        body: 'Suas comparações de JSON são processadas inteiramente no seu navegador com JavaScript — nada é enviado a um servidor para calcular a diferença.',
       },
       {
         label: 'Seguro para dados sensíveis',
@@ -92,15 +92,82 @@ export const pt: SiteContent = {
   },
   about: {
     eyebrow: 'Sobre a ferramenta',
-    heading: 'Um verificador de diff JSON gratuito, feito para velocidade e privacidade',
+    heading: 'Como esta ferramenta compara JSON',
     paragraphs: [
-      'O JSON Diff Checker é um <strong class="text-ink">verificador de diff JSON online</strong> gratuito que permite comparar dois arquivos ou objetos JSON e ver instantaneamente o que mudou. Cole seus dados, envie arquivos ou carregue JSON direto de uma URL, e esta <strong class="text-ink">ferramenta de diff JSON</strong> destaca cada chave adicionada, chave removida e valor alterado em uma árvore limpa e colorida — sem instalação, sem conta e sem que nenhum dado saia do seu navegador.',
-      'A maioria das equipes precisa <strong class="text-ink">comparar JSON online</strong> em algum momento — verificar uma resposta de API contra uma fixture, revisar uma alteração de configuração antes de um deploy ou descobrir por que duas cargas que "deveriam" ser idênticas na verdade não são. Fazer isso a olho nu em um editor de texto é lento e propenso a erros, especialmente com objetos profundamente aninhados ou arrays grandes. Esta <strong class="text-ink">ferramenta de comparação de JSON</strong> faz a correspondência por você: as chaves são comparadas semanticamente, e não como texto bruto, então reordenar chaves dentro de um objeto nunca gera uma diferença falsa. Se você precisa <strong class="text-ink">comparar dois arquivos JSON</strong> que diferem apenas na formatação ou na ordem das chaves, o diff continua focado nas mudanças que realmente importam.',
-      'Os arrays recebem o mesmo tratamento cuidadoso. Por padrão, a ordem importa — comparar <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">["a","b"]</code> com <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">["b","a"]</code> é relatado como uma alteração, já que a sequência muitas vezes carrega significado real. Mas quando você só precisa <strong class="text-ink">comparar objetos JSON online</strong> sem se importar com a ordem dos arrays, ative "Ignorar ordem dos arrays" e a ferramenta faz a correspondência dos elementos do array por um campo id/chave quando existe, ou por valor caso contrário — assim listas embaralhadas não aparecem mais como falsos positivos ruidosos. Isso torna este <strong class="text-ink">visualizador de diff JSON</strong> confiável para respostas de API do mundo real, onde a ordenação de arrays frequentemente é inconsistente entre requisições.',
-      'Como um <strong class="text-ink">verificador de diff JSON gratuito</strong>, não há paywall, sem limite de uso e sem marca d\'água nos resultados exportados. Ao contrário de muitas ferramentas "gratuitas" online que enviam silenciosamente seus dados para um servidor para processamento, aqui tudo é executado no lado do cliente com JavaScript puro — abra as ferramentas de desenvolvedor do seu navegador e observe a aba Rede enquanto compara dados, e você não verá nada sair da página. Isso o torna seguro para usar como um <strong class="text-ink">verificador de diff JSON online grátis</strong> mesmo com cargas sensíveis: tokens de API em fixtures de teste, configurações internas ou dados de clientes que você nunca gostaria que tocassem em um servidor de terceiros.',
-      'Além de uma simples <strong class="text-ink">ferramenta de comparação JSON</strong>, este aplicativo foi construído para lidar com casos de uso reais em produção. Uma entrada inválida não falha silenciosamente — você recebe a linha e a coluna exatas onde a análise quebrou, então corrigir uma vírgula ausente ou uma chave sem aspas leva segundos em vez de uma varredura manual por texto minificado. Quando você precisa <strong class="text-ink">comparar arquivos JSON online</strong> que são grandes ou profundamente aninhados, o diff é renderizado como uma árvore recolhível para que a página permaneça legível e responsiva em vez de virar um paredão de texto quilométrico. Atalhos de teclado permitem pular entre diferenças com Enter e Shift+Enter, e clicar em qualquer linha copia o caminho JSON Pointer dela para colar direto em um relatório de bug ou pull request.',
-      'Este é também um <strong class="text-ink">gerador de diff JSON</strong> prático para fluxos de documentação e revisão de código. Depois de encontrar as diferenças, exporte-as em vez de apenas lê-las: copie o resultado como um JSON Patch compatível com o padrão (RFC 6902) para automação, ou baixe um changelog Markdown limpo, pronto para inserir na descrição de um pull request. Combinado com o suporte para carregar JSON diretamente de uma URL, ele funciona como uma <strong class="text-ink">comparação de JSON online</strong> leve e uma <strong class="text-ink">ferramenta de diff e merge de JSON</strong> para verificar dois endpoints ativos entre si sem precisar baixar nada primeiro.',
-      'Quer você precise <strong class="text-ink">comparar dados JSON</strong> para uma sessão de depuração pontual ou recorra a um <strong class="text-ink">verificador de diferenças JSON</strong> regularmente como parte do seu fluxo de desenvolvimento, esta ferramenta foi projetada para abrir rápido, ser óbvia de usar e segura por padrão — cada comparação acontece localmente, sempre, de graça.',
+      'O JSON Diff Checker compara dois documentos JSON chave por chave e valor por valor, e não linha por linha como texto simples. Isso significa que reordenar chaves dentro de um objeto — <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">{"a":1,"b":2}</code> versus <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">{"b":2,"a":1}</code> — nunca aparece como uma diferença falsa. Apenas adições, remoções e mudanças reais de valor são relatadas.',
+      'Os arrays são comparados por posição por padrão, já que a ordem muitas vezes carrega significado (uma lista ordenada, uma fila de prioridades, uma sequência de passos). Ativar "Ignorar ordem dos arrays" muda para a correspondência baseada em identidade: se os elementos do array são objetos que compartilham um campo estável <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">id</code>, <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">uuid</code> ou <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">key</code>, eles são correspondidos por esse campo independentemente da posição; caso contrário, os elementos são correspondidos por igualdade profunda. Isso evita que resultados de API reordenados ou listas de configuração gerem diffs ruidosos e sem sentido.',
+      'Entradas inválidas são detectadas imediatamente: a ferramenta informa a linha e a coluna exatas onde a análise do JSON falhou, em vez de um erro de sintaxe genérico, para que você corrija uma vírgula ausente ou uma chave sem aspas em segundos. Documentos profundamente aninhados ou grandes são renderizados como uma árvore recolhível, mantendo a página legível em vez de virar um paredão de texto — e clicar em qualquer linha copia o caminho JSON Pointer (RFC 6901) dela para colar em um relatório de bug ou issue.',
+      'Tudo o que foi descrito acima é executado com JavaScript puro na aba do seu navegador. Não há um backend que receba o JSON que você cola, envia ou carrega de uma URL — você pode confirmar isso por conta própria abrindo as ferramentas de desenvolvedor do seu navegador, acessando a aba Rede e observando as requisições enquanto compara dados.',
+    ],
+  },
+  guide: {
+    eyebrow: 'Como fazer',
+    heading: 'Como comparar dois arquivos JSON',
+    intro:
+      'Um passo a passo usando um objeto de configuração real — os mesmos passos funcionam para respostas de API, fixtures ou qualquer JSON que você precise comparar.',
+    steps: [
+      {
+        title: '1. Cole, envie ou carregue seu primeiro JSON',
+        body: 'Cole o documento original no editor da esquerda. Você também pode clicar em "Enviar" para escolher um arquivo .json, ou em "URL" para buscá-lo diretamente de um endpoint de API ou de uma URL de arquivo bruto.',
+      },
+      {
+        title: '2. Cole a segunda versão no editor da direita',
+        body: 'Adicione o JSON atualizado no lado direito da mesma forma. O diff é atualizado automaticamente enquanto você digita ou assim que ambos os lados contêm JSON válido — não há um botão "Comparar" separado para clicar.',
+      },
+      {
+        title: '3. Leia a árvore destacada',
+        body: 'Chaves adicionadas são marcadas com +, chaves removidas com −, e valores alterados mostram o valor antigo riscado ao lado do novo. Use "Próxima" / "Anterior" (ou Enter / Shift+Enter) para pular entre as diferenças sem rolar a página à mão.',
+      },
+      {
+        title: '4. Ajuste a comparação de arrays se necessário',
+        body: 'Se o seu JSON contém arrays que são logicamente iguais, mas em uma ordem diferente — uma lista de tags reordenada, ou resultados de API que voltaram em uma sequência diferente — ative "Ignorar ordem dos arrays" para que itens embaralhados não sejam relatados como alterações.',
+      },
+      {
+        title: '5. Exporte ou compartilhe o resultado',
+        body: 'Clique em qualquer linha para copiar o caminho JSON Pointer dela. Use "Copiar" ou o menu de download para obter o diff como um arquivo JSON Patch RFC 6902, ou como um changelog Markdown que você pode colar direto em um pull request.',
+      },
+    ],
+    exampleHeading: 'Um exemplo real',
+    exampleIntro:
+      'Aqui estão duas versões de uma pequena configuração de deploy. A ferramenta relata três diferenças: um valor alterado, uma chave removida e uma entrada de array adicionada.',
+    exampleLeftLabel: 'Original (v1.2.0)',
+    exampleRightLabel: 'Atualizado (v1.3.0)',
+    exampleLeftJson: '{\n  "service": "billing-api",\n  "version": "1.2.0",\n  "debug": true,\n  "replicas": 2,\n  "regions": ["us-east-1", "eu-west-1"]\n}',
+    exampleRightJson: '{\n  "service": "billing-api",\n  "version": "1.3.0",\n  "replicas": 2,\n  "regions": ["us-east-1", "eu-west-1", "ap-south-1"]\n}',
+    exampleRows: [
+      { path: 'version', note: '"1.2.0" → "1.3.0" — relatado como alterado.', type: 'changed' },
+      { path: 'debug', note: 'presente no original, ausente na atualização — relatado como removido.', type: 'removed' },
+      { path: 'regions[2]', note: '"ap-south-1" só existe à direita — relatado como adicionado.', type: 'added' },
+    ],
+    exampleOutro:
+      '"service" e "replicas" são idênticos nos dois lados, então são renderizados como linhas simples, sem destaque — o diff só chama a atenção para o que realmente mudou. Com "Ignorar ordem dos arrays" desativado, a nova região é tratada como um elemento de array acrescentado ao final, e não como uma reordenação, já que foi adicionada no fim.',
+  },
+  useCases: {
+    eyebrow: 'Casos de uso',
+    heading: 'Para que os desenvolvedores usam',
+    intro:
+      'Algumas situações concretas em que um diff estrutural de JSON é mais rápido do que ler dois arquivos lado a lado.',
+    items: [
+      {
+        title: 'Comparar respostas de API',
+        body: 'Carregue a resposta do mesmo endpoint em staging e em produção com "URL", ou cole duas respostas salvas, para verificar se uma mudança de schema ou um deploy do backend alterou o formato ou os valores da carga.',
+      },
+      {
+        title: 'Revisar alterações de configuração',
+        body: 'Cole a configuração antes e depois de uma edição para ver exatamente quais ajustes mudaram antes de fazer o deploy — pegando uma mudança acidental de valor ou uma chave removida que de outra forma passaria despercebida na revisão de código.',
+      },
+      {
+        title: 'Depurar fixtures de teste',
+        body: 'Quando um teste de snapshot ou fixture falha, cole o JSON esperado e o obtido para ver exatamente qual campo divergiu, em vez de vasculhar a olho um diff de asserção grande.',
+      },
+      {
+        title: 'Auditar mudanças de deploy ou infraestrutura',
+        body: 'Compare estados do Terraform exportados, manifestos do Kubernetes exportados como JSON ou configurações de funções serverless entre dois momentos no tempo para confirmar que apenas os campos pretendidos mudaram.',
+      },
+      {
+        title: 'Rastrear bugs de "deveriam ser idênticos"',
+        body: 'Duas cargas que deveriam ser iguais, mas produzem comportamentos diferentes, quase sempre divergem em algo pequeno — um null versus uma chave ausente, uma string versus um número. O diff revela isso imediatamente.',
+      },
     ],
   },
   faq: {
@@ -108,60 +175,44 @@ export const pt: SiteContent = {
     heading: 'Perguntas comuns',
     items: [
       {
-        q: 'Meus dados JSON são enviados para algum lugar?',
-        a: 'Não. Toda a análise, validação e comparação acontece no seu navegador usando JavaScript. Não há backend que receba seu JSON — você pode verificar isso por conta própria abrindo as ferramentas de desenvolvedor do seu navegador, acessando a aba Rede e observando as requisições enquanto compara dados.',
+        q: 'Como comparo dois arquivos JSON?',
+        a: 'Cole o conteúdo de cada arquivo nos editores da esquerda e da direita, ou use "Enviar" para escolher um arquivo .json para qualquer um dos lados. O diff aparece automaticamente assim que ambos os lados contêm JSON válido — nenhum botão para clicar.',
       },
       {
-        q: 'Faz diferença se a ordem das chaves for diferente?',
-        a: 'Não. A comparação é semântica em vez de textual — as chaves são correspondidas pelo nome independentemente da ordem, então { "a": 1, "b": 2 } e { "b": 2, "a": 1 } são tratados como idênticos.',
+        q: 'Posso comparar JSON grande ou profundamente aninhado?',
+        a: 'Sim. O diff é renderizado como uma árvore recolhível, então nós sem alterações permanecem recolhidos e documentos enormes ou profundamente aninhados continuam legíveis, em vez de gerar uma página quilométrica. O desempenho real depende do seu navegador e dispositivo, já que tudo é executado localmente.',
       },
       {
-        q: 'Posso comparar arquivos JSON com ordens de array diferentes?',
-        a: 'Sim. Por padrão, a ordem do array importa — comparar ["a","b"] com ["b","a"] mostra ambas as entradas como alteradas, já que a ordem muitas vezes carrega significado (por exemplo, listas ordenadas). Ative "Ignorar ordem dos arrays" acima do resultado do diff para comparar arrays por valor: os elementos são correspondidos por um campo id/uuid/chave quando os objetos têm um, ou por valor caso contrário, então a reordenação sozinha deixa de ser relatada — apenas elementos que foram genuinamente adicionados, removidos ou realmente alterados.',
+        q: 'Como os valores adicionados, removidos e alterados são exibidos?',
+        a: 'Chaves ou itens de array adicionados são marcados com + e um fundo verde. Os removidos são marcados com − e riscados. Valores alterados mostram o valor antigo riscado ao lado do novo valor, marcado com ~.',
       },
       {
-        q: 'O que acontece se meu JSON for inválido?',
-        a: 'Você verá uma mensagem de erro clara com a linha e a coluna exatas onde a análise falhou, para que você possa corrigir erros de sintaxe como vírgulas ausentes, chaves sem aspas ou vírgulas finais imediatamente.',
+        q: 'A ordem das chaves do JSON importa?',
+        a: 'Não. Os objetos são comparados pelo nome da chave, não pela posição, então { "a": 1, "b": 2 } e { "b": 2, "a": 1 } são tratados como idênticos. Apenas a ordem dos arrays é significativa, e somente quando "Ignorar ordem dos arrays" está desativado.',
       },
       {
-        q: 'Qual o tamanho máximo de arquivo que posso comparar?',
-        a: 'O desempenho depende do seu navegador e dispositivo, já que tudo é executado localmente. A ferramenta foi construída para permanecer responsiva com documentos grandes e profundamente aninhados, renderizando a árvore de diff com nós recolhíveis.',
+        q: 'Como os arrays JSON são comparados?',
+        a: 'Por padrão, os arrays são comparados posição por posição, então reordenar elementos é relatado como uma alteração. Ative "Ignorar ordem dos arrays" para comparar por identidade: objetos que compartilham um campo estável id, uuid ou key são correspondidos por esse campo independentemente da posição, e todo o restante é correspondido por valor.',
       },
       {
-        q: 'Posso baixar ou compartilhar o resultado?',
-        a: 'Sim. Você pode copiar o diff como um JSON Patch (RFC 6902) ou baixá-lo como um arquivo JSON Patch ou um changelog Markdown legível — útil para pull requests, relatórios de bugs ou documentação.',
+        q: 'O que acontece quando o JSON é inválido?',
+        a: 'O editor mostra a linha e a coluna exatas onde a análise falhou, junto com uma mensagem de erro curta, para que você corrija uma vírgula ausente, uma chave sem aspas ou uma vírgula final imediatamente, em vez de adivinhar.',
       },
       {
-        q: 'Como verificar se o JSON está correto?',
-        a: 'Cole seu JSON em qualquer um dos editores desta página — ele é validado enquanto você digita. Se o JSON for inválido, você verá uma mensagem de erro com a linha e a coluna exatas do problema (por exemplo, uma vírgula ausente, chave sem aspas ou vírgula final). Se ele for analisado sem problemas, é um JSON válido.',
+        q: 'Posso carregar JSON de uma URL?',
+        a: 'Sim. Clique em "URL" em qualquer um dos editores, informe um endereço http(s) e a ferramenta o busca diretamente do seu navegador. Isso só funciona se o servidor permitir requisições de origem cruzada (CORS); se não permitir, baixe o arquivo e use "Enviar" no lugar.',
       },
       {
-        q: 'O Diffchecker é gratuito?',
-        a: 'Este verificador de diff JSON é totalmente gratuito, sem cadastro, sem limites de uso e sem dados enviados para um servidor — as comparações são executadas inteiramente no seu navegador. (Diffchecker.com é um serviço separado, de terceiros; não temos afiliação com ele.)',
+        q: 'Meu JSON é enviado para um servidor?',
+        a: 'Não. A análise, a validação e a comparação acontecem todas no seu navegador com JavaScript. Não há um backend que receba o que você cola, envia ou carrega — abra as ferramentas de desenvolvedor do seu navegador, acesse a aba Rede e compare dados para confirmar que nada é enviado a lugar nenhum.',
       },
       {
-        q: 'Como verificar a diferença entre dois arquivos JSON?',
-        a: 'Abra o conteúdo de cada arquivo e cole-o nos editores da esquerda e da direita acima, depois clique em Comparar (ou deixe fazer o diff automaticamente). Chaves adicionadas, removidas e alteradas são destacadas linha por linha, e você pode ativar "Ignorar ordem dos arrays" se a ordenação de arrays não deve contar como diferença.',
+        q: 'Como funciona a exportação para JSON Patch?',
+        a: 'Clique em "Copiar" ou use o menu de download para obter o diff como um JSON Patch compatível com o padrão RFC 6902: um array JSON de operações add, remove e replace com o caminho e o valor exatos de cada diferença, pronto para ferramentas automatizadas.',
       },
       {
-        q: 'Como uso o jsondiff em Python?',
-        a: 'Em Python, a opção popular é o pacote `jsondiff`: instale-o com `pip install jsondiff`, depois chame `jsondiff.diff(a, b)` onde `a` e `b` são objetos JSON já analisados (dicts). Ele retorna um dict descrevendo o que mudou. Isso é útil para scripts ou verificações de CI — para comparações rápidas, visuais e pontuais sem escrever código, use a ferramenta desta página.',
-      },
-      {
-        q: 'Como se chama a diferença entre dois arquivos JSON?',
-        a: 'É comumente chamada de "diff de JSON" ou "delta de JSON" — uma descrição estruturada do que foi adicionado, removido ou alterado entre dois documentos JSON. Um formato padronizado para expressá-la é o JSON Patch (RFC 6902), que esta ferramenta pode gerar para você.',
-      },
-      {
-        q: 'Como comparo dois objetos JSON?',
-        a: 'Cole um objeto em cada editor acima. A comparação é feita chave por chave (não como texto simples), então os objetos são considerados iguais se tiverem as mesmas chaves e valores, independentemente da ordem das chaves, enquanto quaisquer valores adicionados, removidos ou alterados são destacados.',
-      },
-      {
-        q: 'Você consegue fazer diff de arquivos JSON?',
-        a: 'Sim — cole o conteúdo dos dois arquivos nos dois editores desta página e as diferenças são destacadas instantaneamente. Tudo é executado no lado do cliente, no seu navegador, então nenhum arquivo é enviado a lugar nenhum.',
-      },
-      {
-        q: 'Como você verifica se dois objetos JSON são iguais?',
-        a: 'Compare-os com esta ferramenta: se a visualização do diff não mostrar nenhuma entrada adicionada, removida ou alterada, os objetos são equivalentes. Dois objetos JSON são considerados iguais quando contêm as mesmas chaves e valores, mesmo que as chaves apareçam em ordem diferente — apenas a ordem dos arrays importa, a menos que você ative "Ignorar ordem dos arrays".',
+        q: 'Como posso exportar as diferenças como Markdown?',
+        a: 'Abra o menu de download ao lado de "Copiar" e escolha "Changelog Markdown". Você recebe um arquivo Markdown listando cada caminho adicionado, removido e alterado com seus valores, pronto para colar na descrição de um pull request ou em um changelog.',
       },
     ],
   },
@@ -220,7 +271,6 @@ export const pt: SiteContent = {
     privacyPolicy: 'Política de privacidade',
     terms: 'Termos e condições',
     copyright: '© {year} JSON Diff Checker. Todo o processamento acontece localmente no seu navegador.',
-    notAffiliated: 'Não afiliado ao json-diff.com.',
   },
   about_us: {
     metaTitle: 'Sobre nós | JSON Diff Checker',
@@ -398,7 +448,7 @@ export const pt: SiteContent = {
       {
         heading: 'Referências a terceiros',
         body: [
-          'O Site não é afiliado, endossado nem patrocinado por qualquer serviço de terceiros, incluindo ferramentas de nome semelhante como Diffchecker.com ou json-diff.com.',
+          'O Site é uma ferramenta independente e não é afiliado, endossado nem patrocinado por qualquer outro serviço de comparação ou diff de JSON.',
         ],
       },
       {

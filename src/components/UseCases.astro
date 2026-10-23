@@ -1,0 +1,29 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+const u = t.useCases;
+---
+
+<section id="use-cases" class="border-b border-hairline bg-canvas py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="mono-eyebrow mb-3">{u.eyebrow}</p>
+      <h2 class="text-[28px] font-semibold tracking-[-0.03em] text-ink sm:text-[36px]">
+        {u.heading}
+      </h2>
+      <p class="mt-4 text-[15px] leading-relaxed text-body">{u.intro}</p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {u.items.map((item) => (
+        <div class="card hairline-shadow p-6">
+          <h3 class="text-[16px] font-semibold tracking-[-0.01em] text-ink">{item.title}</h3>
+          <p class="mt-2 text-[14px] leading-relaxed text-body">{item.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
