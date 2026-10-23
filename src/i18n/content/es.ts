@@ -295,7 +295,7 @@ export const es: SiteContent = {
       {
         heading: 'Nuestro enfoque de la privacidad',
         body: [
-          'Cada comparación ocurre íntegramente del lado del cliente, en tu navegador. No operamos un backend que reciba el JSON que pegas, y no usamos scripts de rastreo ni etiquetas publicitarias. Puedes verificarlo tú mismo abriendo las herramientas de desarrollo de tu navegador, yendo a la pestaña de red y observando las solicitudes mientras usas la herramienta.',
+          'Cada comparación ocurre íntegramente del lado del cliente, en tu navegador. No operamos un backend que reciba el JSON que pegas, y el JSON que comparas nunca se envía a terceros. El Sitio se financia con publicidad de Google AdSense y usa Google Analytics para estadísticas básicas de tráfico, como se describe en nuestra Política de privacidad. Puedes verificar que tu JSON permanece local abriendo las herramientas de desarrollo de tu navegador, yendo a la pestaña de red y observando las solicitudes mientras usas la herramienta.',
         ],
       },
       {
@@ -347,7 +347,7 @@ export const es: SiteContent = {
       'Política de privacidad de JSON Diff Checker. Toda la comparación de JSON ocurre localmente en tu navegador — no subimos, almacenamos ni transmitimos los datos que pegas.',
     eyebrow: 'Política de privacidad',
     heading: 'Política de privacidad',
-    updated: '6 de septiembre de 2026',
+    updated: '23 de octubre de 2026',
     lastUpdatedLabel: 'Última actualización:',
     sections: [
       {
@@ -365,13 +365,15 @@ export const es: SiteContent = {
       {
         heading: 'Cookies y almacenamiento local',
         body: [
-          'Usamos el almacenamiento local de tu navegador únicamente para recordar tu preferencia de tema (modo claro u oscuro). Esta información permanece en tu dispositivo y no se transmite a nosotros ni a ningún tercero.',
+          'Usamos el almacenamiento local de tu navegador para recordar tu preferencia de tema (modo claro u oscuro); esta información permanece en tu dispositivo. Nuestros socios de publicidad y analítica también pueden establecer cookies o usar identificadores similares, como se describe en la sección siguiente.',
         ],
       },
       {
         heading: 'Analíticas y publicidad',
         body: [
-          'El Sitio no carga scripts de analíticas de terceros, etiquetas publicitarias ni píxeles de rastreo. Puedes verificarlo abriendo las herramientas de desarrollo de tu navegador e inspeccionando la pestaña de red mientras usas la herramienta.',
+          'Usamos Google Analytics para entender cómo se utiliza el Sitio (por ejemplo, páginas visitadas, ubicación aproximada y tipo de dispositivo) y Google AdSense para mostrar anuncios. Estos servicios de Google pueden usar cookies e identificadores similares para medir el uso y mostrar anuncios.',
+          'Terceros proveedores, incluido Google, usan cookies para mostrar anuncios basados en tus visitas anteriores a este Sitio y a otros sitios web. El uso de cookies publicitarias por parte de Google permite que él y sus socios muestren anuncios basados en tu visita a este Sitio y/o a otros sitios de Internet. Puedes desactivar la publicidad personalizada en <a href="https://www.google.com/settings/ads" rel="noopener noreferrer" target="_blank">Configuración de anuncios de Google</a> o en <a href="https://www.aboutads.info/choices/" rel="noopener noreferrer" target="_blank">aboutads.info</a>. Consulta también <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">cómo usa Google la información de los sitios que utilizan sus servicios</a>.',
+          'El JSON que pegas, subes o cargas en la herramienta se procesa únicamente en tu navegador y nosotros nunca lo enviamos a Google ni a ningún otro tercero.',
         ],
       },
       {

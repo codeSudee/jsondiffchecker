@@ -297,7 +297,7 @@ export const de: SiteContent = {
       {
         heading: 'Unser Ansatz beim Datenschutz',
         body: [
-          'Jeder Vergleich findet vollständig clientseitig in deinem Browser statt. Wir betreiben kein Backend, das das von dir eingefügte JSON empfängt, und wir verwenden keine Tracking-Skripte oder Werbe-Tags. Du kannst dies selbst überprüfen, indem du die Entwicklertools deines Browsers öffnest, zum Netzwerk-Tab gehst und auf Anfragen achtest, während du das Tool verwendest.',
+          'Jeder Vergleich findet vollständig clientseitig in deinem Browser statt. Wir betreiben kein Backend, das das von dir eingefügte JSON empfängt, und das von dir verglichene JSON wird nie an Dritte gesendet. Die Website wird durch Google-AdSense-Werbung finanziert und nutzt Google Analytics für grundlegende Besucherstatistiken, wie in unserer Datenschutzerklärung beschrieben. Dass dein JSON lokal bleibt, kannst du selbst prüfen, indem du die Entwicklertools deines Browsers öffnest, zum Netzwerk-Tab gehst und auf Anfragen achtest, während du das Tool verwendest.',
         ],
       },
       {
@@ -349,7 +349,7 @@ export const de: SiteContent = {
       'Datenschutzerklärung für JSON Diff Checker. Der gesamte JSON-Vergleich findet lokal in deinem Browser statt — wir laden, speichern oder übertragen die von dir eingefügten Daten nicht.',
     eyebrow: 'Datenschutzerklärung',
     heading: 'Datenschutzerklärung',
-    updated: '6. September 2026',
+    updated: '23. Oktober 2026',
     lastUpdatedLabel: 'Zuletzt aktualisiert:',
     sections: [
       {
@@ -367,13 +367,15 @@ export const de: SiteContent = {
       {
         heading: 'Cookies und lokaler Speicher',
         body: [
-          'Wir verwenden den lokalen Speicher deines Browsers nur, um deine Design-Einstellung (heller oder dunkler Modus) zu speichern. Diese Information bleibt auf deinem Gerät und wird nicht an uns oder Dritte übertragen.',
+          'Wir verwenden den lokalen Speicher deines Browsers, um deine Design-Einstellung (heller oder dunkler Modus) zu speichern; diese Information bleibt auf deinem Gerät. Unsere Werbe- und Analysepartner können zudem Cookies setzen oder ähnliche Kennungen verwenden, wie im nächsten Abschnitt beschrieben.',
         ],
       },
       {
         heading: 'Analyse und Werbung',
         body: [
-          'Die Website lädt keine Analyse-Skripte von Drittanbietern, keine Werbe-Tags und keine Tracking-Pixel. Du kannst dies überprüfen, indem du die Entwicklertools deines Browsers öffnest und den Netzwerk-Tab inspizierst, während du das Tool verwendest.',
+          'Wir verwenden Google Analytics, um zu verstehen, wie die Website genutzt wird (z. B. besuchte Seiten, ungefährer Standort und Gerätetyp), sowie Google AdSense, um Werbeanzeigen anzuzeigen. Diese Google-Dienste können Cookies und ähnliche Kennungen verwenden, um die Nutzung zu messen und Anzeigen auszuspielen.',
+          'Drittanbieter, einschließlich Google, verwenden Cookies, um Anzeigen auf Basis deiner früheren Besuche dieser und anderer Websites auszuspielen. Durch die Verwendung von Werbe-Cookies können Google und seine Partner Anzeigen auf Basis deines Besuchs dieser Website und/oder anderer Websites im Internet ausspielen. Du kannst personalisierte Werbung in den <a href="https://www.google.com/settings/ads" rel="noopener noreferrer" target="_blank">Google-Anzeigeneinstellungen</a> oder unter <a href="https://www.aboutads.info/choices/" rel="noopener noreferrer" target="_blank">aboutads.info</a> deaktivieren. Siehe auch <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">wie Google Informationen von Websites verwendet, die seine Dienste nutzen</a>.',
+          'Das JSON, das du in das Tool einfügst, hochlädst oder lädst, wird ausschließlich in deinem Browser verarbeitet und von uns niemals an Google oder andere Dritte gesendet.',
         ],
       },
       {

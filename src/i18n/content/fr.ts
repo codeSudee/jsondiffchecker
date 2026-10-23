@@ -261,7 +261,7 @@ export const fr: SiteContent = {
       {
         heading: 'Notre approche de la confidentialité',
         body: [
-          "Chaque comparaison se fait entièrement côté client, dans votre navigateur. Nous n'exploitons aucun backend qui reçoit le JSON que vous collez, et nous n'utilisons ni scripts de suivi ni balises publicitaires. Vous pouvez le vérifier vous-même en ouvrant les outils de développement de votre navigateur, en allant dans l'onglet réseau et en observant les requêtes pendant que vous utilisez l'outil.",
+          "Chaque comparaison se fait entièrement côté client, dans votre navigateur. Nous n'exploitons aucun backend qui reçoit le JSON que vous collez, et le JSON que vous comparez n'est jamais envoyé à un tiers. Le Site est financé par la publicité Google AdSense et utilise Google Analytics pour des statistiques de trafic de base, comme décrit dans notre Politique de confidentialité. Vous pouvez vérifier que votre JSON reste local en ouvrant les outils de développement de votre navigateur, en allant dans l'onglet réseau et en observant les requêtes pendant que vous utilisez l'outil.",
         ],
       },
       {
@@ -313,7 +313,7 @@ export const fr: SiteContent = {
       'Politique de confidentialité de JSON Diff Checker. Toute la comparaison de JSON se fait localement dans votre navigateur — nous n\'envoyons, ne stockons ni ne transmettons les données que vous collez.',
     eyebrow: 'Politique de confidentialité',
     heading: 'Politique de confidentialité',
-    updated: '6 septembre 2026',
+    updated: '23 octobre 2026',
     lastUpdatedLabel: 'Dernière mise à jour :',
     sections: [
       {
@@ -331,13 +331,15 @@ export const fr: SiteContent = {
       {
         heading: 'Cookies et stockage local',
         body: [
-          "Nous utilisons le stockage local de votre navigateur uniquement pour mémoriser votre préférence de thème (mode clair ou sombre). Cette information reste sur votre appareil et n'est transmise ni à nous ni à un tiers.",
+          "Nous utilisons le stockage local de votre navigateur pour mémoriser votre préférence de thème (mode clair ou sombre) ; cette information reste sur votre appareil. Nos partenaires publicitaires et d'analyse peuvent également déposer des cookies ou utiliser des identifiants similaires, comme décrit dans la section suivante.",
         ],
       },
       {
         heading: 'Analytique et publicité',
         body: [
-          "Le Site ne charge aucun script d'analytique tiers, balise publicitaire ni pixel de suivi. Vous pouvez le vérifier en ouvrant les outils de développement de votre navigateur et en inspectant l'onglet réseau pendant que vous utilisez l'outil.",
+          "Nous utilisons Google Analytics pour comprendre comment le Site est utilisé (par exemple, pages consultées, localisation approximative et type d'appareil) et Google AdSense pour afficher des publicités. Ces services Google peuvent utiliser des cookies et des identifiants similaires pour mesurer l'utilisation et diffuser des annonces.",
+          "Des fournisseurs tiers, dont Google, utilisent des cookies pour diffuser des annonces en fonction de vos visites précédentes sur ce Site et sur d'autres sites web. L'utilisation de cookies publicitaires par Google lui permet, ainsi qu'à ses partenaires, de diffuser des annonces en fonction de votre visite sur ce Site et/ou sur d'autres sites Internet. Vous pouvez désactiver la publicité personnalisée dans les <a href=\"https://www.google.com/settings/ads\" rel=\"noopener noreferrer\" target=\"_blank\">Paramètres des annonces Google</a> ou sur <a href=\"https://www.aboutads.info/choices/\" rel=\"noopener noreferrer\" target=\"_blank\">aboutads.info</a>. Voir aussi <a href=\"https://policies.google.com/technologies/partner-sites\" rel=\"noopener noreferrer\" target=\"_blank\">comment Google utilise les informations provenant des sites qui utilisent ses services</a>.",
+          "Le JSON que vous collez, importez ou chargez dans l'outil est traité uniquement dans votre navigateur et n'est jamais envoyé par nous à Google ni à aucun autre tiers.",
         ],
       },
       {

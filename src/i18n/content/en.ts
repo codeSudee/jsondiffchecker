@@ -296,7 +296,7 @@ export const en: SiteContent = {
       {
         heading: 'Our approach to privacy',
         body: [
-          "Every comparison happens entirely client-side, in your browser. We do not operate a backend that receives the JSON you paste, and we do not use tracking scripts or ad tags. You can verify this yourself by opening your browser's developer tools, going to the Network tab, and watching for requests while you use the tool.",
+          "Every comparison happens entirely client-side, in your browser. We do not operate a backend that receives the JSON you paste, and the JSON you compare is never sent to any third party. The Site is supported by Google AdSense advertising and uses Google Analytics for basic traffic statistics, as described in our Privacy Policy. You can verify that your JSON stays local by opening your browser's developer tools, going to the Network tab, and watching for requests while you use the tool.",
         ],
       },
       {
@@ -348,7 +348,7 @@ export const en: SiteContent = {
       'Privacy Policy for JSON Diff Checker. All JSON comparison happens locally in your browser — we do not upload, store, or transmit the data you paste.',
     eyebrow: 'Privacy policy',
     heading: 'Privacy Policy',
-    updated: 'September 6, 2026',
+    updated: 'October 23, 2026',
     lastUpdatedLabel: 'Last updated:',
     sections: [
       {
@@ -366,13 +366,15 @@ export const en: SiteContent = {
       {
         heading: 'Cookies and local storage',
         body: [
-          "We use your browser's local storage only to remember your theme preference (light or dark mode). This information stays on your device and is not transmitted to us or any third party.",
+          "We use your browser's local storage to remember your theme preference (light or dark mode); this stays on your device. Our advertising and analytics partners may also set cookies or use similar identifiers, as described in the next section.",
         ],
       },
       {
         heading: 'Analytics and advertising',
         body: [
-          "The Site does not load third-party analytics scripts, advertising tags, or tracking pixels. You can verify this by opening your browser's developer tools and inspecting the Network tab while using the tool.",
+          "We use Google Analytics to understand how the Site is used (for example, pages visited, approximate location, and device type) and Google AdSense to display advertisements. These Google services may use cookies and similar identifiers to measure usage and show ads.",
+          "Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this Site and other websites. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to this Site and/or other sites on the Internet. You can opt out of personalized advertising in <a href=\"https://www.google.com/settings/ads\" rel=\"noopener noreferrer\" target=\"_blank\">Google Ads Settings</a> or at <a href=\"https://www.aboutads.info/choices/\" rel=\"noopener noreferrer\" target=\"_blank\">aboutads.info</a>. See also <a href=\"https://policies.google.com/technologies/partner-sites\" rel=\"noopener noreferrer\" target=\"_blank\">how Google uses information from sites that use its services</a>.",
+          "The JSON you paste, upload, or load into the tool is processed only in your browser and is never sent to Google or any other third party by us.",
         ],
       },
       {
