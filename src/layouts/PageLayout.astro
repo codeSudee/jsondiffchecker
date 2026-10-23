@@ -2,6 +2,8 @@
 import Layout from './Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
 
 interface Props {
   title: string;
@@ -22,9 +24,15 @@ const {
   updatedLabel = 'Last updated:',
   noindex = false,
 } = Astro.props;
+
+const t = useContent(getLangFromUrl(Astro.url));
+const breadcrumbs = [
+  { name: t.nav.brand, path: Astro.url.pathname.split('/').length > 3 ? '/' + Astro.url.pathname.split('/')[1] + '/' : '/' },
+  { name: heading, path: Astro.url.pathname },
+];
 ---
 
-<Layout title={title} description={description} noindex={noindex}>
+<Layout title={title} description={description} noindex={noindex} breadcrumbs={breadcrumbs}>
   <SiteHeader />
   <main id="main-content">
     <section class="border-b border-hairline bg-canvas py-16 sm:py-20">

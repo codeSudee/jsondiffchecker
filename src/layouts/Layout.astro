@@ -13,13 +13,15 @@ interface Props {
   description?: string;
   ogImage?: string;
   noindex?: boolean;
+  breadcrumbs?: { name: string; path: string }[];
 }
 
 const {
   title = 'JSON Diff Checker — Compare JSON Online Free | JSON Diff Tool',
   description = 'Free JSON diff checker to compare two JSON files or objects online. Our JSON comparison tool highlights added, removed, and changed keys instantly — no upload, no sign-up, 100% private in your browser.',
-  ogImage = '/web-app-manifest-512x512.png',
+  ogImage = '/og-image.png',
   noindex = false,
+  breadcrumbs,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -38,6 +40,41 @@ const alternates = (Object.keys(languages) as (keyof typeof languages)[]).map((l
   const href = new URL(translatePath(logicalPath), Astro.site).toString();
   return { hreflang: hreflangMap[l], href };
 });
+const siteUrl = new URL('/', Astro.site).toString();
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}#organization`,
+      name: 'JSON Diff Checker',
+      url: siteUrl,
+      logo: { '@type': 'ImageObject', url: new URL('/web-app-manifest-512x512.png', Astro.site).toString(), width: 512, height: 512 },
+      email: 'support@jsondiffchecker.com',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}#website`,
+      url: siteUrl,
+      name: 'JSON Diff Checker',
+      inLanguage: Object.values(hreflangMap),
+      publisher: { '@id': `${siteUrl}#organization` },
+    },
+    ...(breadcrumbs && breadcrumbs.length
+      ? [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: breadcrumbs.map((b, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: b.name,
+              item: new URL(b.path, Astro.site).toString(),
+            })),
+          },
+        ]
+      : []),
+  ],
+};
 // x-default points at the default-language (English, root) version.
 const xDefaultHref = new URL(useTranslatedPath(defaultLang)(logicalPath), Astro.site).toString();
 ---
@@ -62,14 +99,12 @@ const xDefaultHref = new URL(useTranslatedPath(defaultLang)(logicalPath), Astro.
 
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta
-			name="keywords"
-			content="JSON diff checker, json diff checker online, compare json online, json diff tool, compare two json files, json comparison tool, json diff viewer, compare json objects online, free json diff checker, json compare tool, json diff checker online free, compare json files online, json diff generator, online json comparison, json diff and merge tool, compare json data, json difference checker, json diff checker free"
-		/>
-		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
 		<meta name="author" content="JSON Diff Checker" />
 		<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
 		<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(siteSchema)} />
 
 		<!-- Google AdSense -->
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6778789012514648" crossorigin="anonymous"></script>
@@ -95,8 +130,8 @@ const xDefaultHref = new URL(useTranslatedPath(defaultLang)(logicalPath), Astro.
 		<meta property="og:site_name" content="JSON Diff Checker" />
 		<meta property="og:locale" content={ogLocale} />
 		<meta property="og:image" content={ogImageURL} />
-		<meta property="og:image:width" content="512" />
-		<meta property="og:image:height" content="512" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content="JSON Diff Checker — compare JSON online" />
 
 		<meta name="twitter:card" content="summary_large_image" />

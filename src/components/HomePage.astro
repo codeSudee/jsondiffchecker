@@ -26,7 +26,11 @@ const jsonLd = {
   '@type': 'WebApplication',
   name: 'JSON Diff Checker',
   alternateName: ['JSON Diff Tool', 'JSON Comparison Tool', 'JSON Compare Tool'],
-  url: 'https://jsondiffchecker.com',
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  isAccessibleForFree: true,
+  browserRequirements: 'Requires JavaScript',
+  featureList: t.features.items.map((i) => i.title),
+  publisher: { '@id': 'https://jsondiffchecker.com/#organization' },
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'Any',
   inLanguage: lang,
@@ -56,12 +60,12 @@ const faqJsonLd = {
   <main id="main-content">
     <Hero />
     <ToolSection />
+    <HowToGuide />
     <Features />
+    <UseCases />
     <Privacy />
     <About />
     <Faq />
-    <HowToGuide />
   </main>
-    <UseCases />
   <SiteFooter />
 </Layout>
