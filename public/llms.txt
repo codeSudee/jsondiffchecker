@@ -1,0 +1,13 @@
+# JSON Diff Checker
+
+> Free online JSON diff checker. Compare two JSON documents and see added, removed, and changed keys in a collapsible tree. Runs entirely in the browser; no upload, no sign-up.
+
+## Main pages
+- [JSON Diff Checker (tool)](https://jsondiffchecker.com/): Paste, upload, or load JSON from a URL and compare; export as JSON Patch (RFC 6902) or Markdown changelog.
+- [About](https://jsondiffchecker.com/about-us/)
+- [Contact](https://jsondiffchecker.com/contact-us/)
+- [Privacy Policy](https://jsondiffchecker.com/privacy-policy/)
+- [Terms and Conditions](https://jsondiffchecker.com/terms-and-conditions/)
+
+## Languages
+Also available in Spanish (/es/), Japanese (/ja/), French (/fr/), German (/de/), Portuguese (/pt/), Korean (/ko/), Italian (/it/).

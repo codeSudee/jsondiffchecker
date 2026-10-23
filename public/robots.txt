@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# AdSense crawler must always be able to fetch pages
+User-agent: Mediapartners-Google
+Allow: /
+
 Sitemap: https://jsondiffchecker.com/sitemap-index.xml
