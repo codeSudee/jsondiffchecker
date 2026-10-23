@@ -1,31 +1,22 @@
 ---
-const points = [
-  {
-    label: 'No server round-trip',
-    body: 'Parsing, validation, and diffing all run in your browser with plain JavaScript. Your JSON is never transmitted anywhere.',
-  },
-  {
-    label: 'No analytics, no ad scripts',
-    body: "This page loads no third-party trackers or ad tags — check your browser's network tab and you'll see nothing beyond the page itself.",
-  },
-  {
-    label: 'Safe for sensitive data',
-    body: 'API responses, config files, tokens in test fixtures — paste with confidence. What happens in your browser stays in your browser.',
-  },
-];
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+const points = t.privacy.points;
 ---
 
 <section id="privacy" class="border-b border-hairline bg-canvas py-20 sm:py-28">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <div>
-        <p class="mono-eyebrow mb-3">Privacy by design</p>
+        <p class="mono-eyebrow mb-3">{t.privacy.eyebrow}</p>
         <h2 class="text-[28px] font-semibold tracking-[-0.03em] text-ink sm:text-[36px]">
-          Your data never leaves your machine
+          {t.privacy.heading}
         </h2>
         <p class="mt-4 max-w-md text-[15px] leading-relaxed text-body">
-          Many "online" JSON tools quietly ship your data to a server to process it. This one doesn't —
-          there's no backend to send it to. Everything happens client-side, in memory, in your tab.
+          {t.privacy.intro}
         </p>
       </div>
 

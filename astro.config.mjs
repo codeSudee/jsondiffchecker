@@ -14,6 +14,22 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en',
+          es: 'es',
+          ja: 'ja',
+          fr: 'fr',
+          de: 'de',
+          pt: 'pt',
+          ko: 'ko',
+          it: 'it',
+        },
+      },
+    }),
+  ],
   adapter: cloudflare(),
 });

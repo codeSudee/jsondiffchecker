@@ -1,28 +1,43 @@
 ---
+import { getLangFromUrl, useTranslatedPath } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+import LanguagePicker from './LanguagePicker.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+const tp = useTranslatedPath(lang);
+
+const homeHref = tp('/');
+const toolHref = tp('/#tool');
+const featuresHref = tp('/#features');
+const privacyHref = tp('/#privacy');
+const faqHref = tp('/#faq');
+const aboutHref = tp('/about-us');
 ---
 
 <header class="sticky top-0 z-20 border-b border-hairline bg-canvas/90 backdrop-blur-sm">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-    <a href="/" class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.02em] text-ink">
+    <a href={homeHref} class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.02em] text-ink">
       <span class="flex h-6 w-6 items-center justify-center rounded-sm bg-ink text-[13px] font-semibold text-on-primary">{'{}'}</span>
-      <span class="hidden xs:inline">JSON Diff Checker</span>
-      <span class="xs:hidden">JSON Diff</span>
+      <span class="hidden xs:inline">{t.nav.brand}</span>
+      <span class="xs:hidden">{t.nav.brandShort}</span>
     </a>
-    <nav class="hidden items-center gap-1 sm:flex" aria-label="Primary">
-      <a href="/#tool" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">Tool</a>
-      <a href="/#features" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">Features</a>
-      <a href="/#privacy" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">Privacy</a>
-      <a href="/#faq" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">FAQ</a>
-      <a href="/about-us" class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">About</a>
+    <nav class="hidden items-center gap-1 sm:flex" aria-label={t.nav.primaryNavLabel}>
+      <a href={toolHref} class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">{t.nav.tool}</a>
+      <a href={featuresHref} class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">{t.nav.features}</a>
+      <a href={privacyHref} class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">{t.nav.privacy}</a>
+      <a href={faqHref} class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">{t.nav.faq}</a>
+      <a href={aboutHref} class="rounded-full px-3 py-1.5 text-[14px] text-body hover:text-ink">{t.nav.about}</a>
     </nav>
     <div class="flex items-center gap-2">
+      <LanguagePicker variant="header" />
       <button
         type="button"
         class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline text-body hover:bg-hairline-soft hover:text-ink"
         data-action="toggle-theme"
-        aria-label="Toggle dark mode"
+        aria-label={t.nav.toggleTheme}
         aria-pressed="false"
-        title="Toggle dark mode"
+        title={t.nav.toggleTheme}
       >
         <svg data-role="theme-icon-dark" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
@@ -32,14 +47,16 @@
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
         </svg>
       </button>
-      <a href="/#tool" class="hidden items-center rounded-pill bg-ink px-4 py-2 text-[13px] font-medium text-on-primary hover:opacity-85 sm:inline-flex">
-        Open the tool
+      <a href={toolHref} class="hidden items-center rounded-pill bg-ink px-4 py-2 text-[13px] font-medium text-on-primary hover:opacity-85 sm:inline-flex">
+        {t.nav.openTool}
       </a>
       <button
         type="button"
         class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline text-body hover:bg-hairline-soft hover:text-ink sm:hidden"
         data-action="toggle-menu"
-        aria-label="Open menu"
+        aria-label={t.nav.openMenu}
+        data-label-open={t.nav.openMenu}
+        data-label-close={t.nav.closeMenu}
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
@@ -55,16 +72,16 @@
   <nav
     id="mobile-menu"
     class="hidden flex-col border-t border-hairline bg-canvas px-4 py-2 sm:hidden"
-    aria-label="Primary"
+    aria-label={t.nav.primaryNavLabel}
     data-role="mobile-menu"
   >
-    <a href="/#tool" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">Tool</a>
-    <a href="/#features" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">Features</a>
-    <a href="/#privacy" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">Privacy</a>
-    <a href="/#faq" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">FAQ</a>
-    <a href="/about-us" class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">About</a>
-    <a href="/#tool" class="my-2 inline-flex items-center justify-center rounded-pill bg-ink px-4 py-2.5 text-[14px] font-medium text-on-primary hover:opacity-85" data-role="mobile-menu-link">
-      Open the tool
+    <a href={toolHref} class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">{t.nav.tool}</a>
+    <a href={featuresHref} class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">{t.nav.features}</a>
+    <a href={privacyHref} class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">{t.nav.privacy}</a>
+    <a href={faqHref} class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">{t.nav.faq}</a>
+    <a href={aboutHref} class="rounded-sm px-2 py-2.5 text-[15px] text-body hover:text-ink" data-role="mobile-menu-link">{t.nav.about}</a>
+    <a href={toolHref} class="my-2 inline-flex items-center justify-center rounded-pill bg-ink px-4 py-2.5 text-[14px] font-medium text-on-primary hover:opacity-85" data-role="mobile-menu-link">
+      {t.nav.openTool}
     </a>
   </nav>
 </header>
@@ -113,7 +130,7 @@
       menu?.classList.toggle('hidden', !open);
       menu?.classList.toggle('flex', open);
       btn?.setAttribute('aria-expanded', String(open));
-      btn?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      btn?.setAttribute('aria-label', open ? (btn.dataset.labelClose ?? 'Close menu') : (btn.dataset.labelOpen ?? 'Open menu'));
       openIcon?.classList.toggle('hidden', open);
       closeIcon?.classList.toggle('hidden', !open);
     }

@@ -1,17 +1,22 @@
 ---
 import DiffChecker from './DiffChecker.astro';
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
 ---
 
 <section id="tool" class="bg-canvas py-14 sm:py-20">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <div class="mb-6 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <p class="mono-eyebrow mb-2">The tool</p>
+        <p class="mono-eyebrow mb-2">{t.tool.eyebrow}</p>
         <h2 class="text-[24px] font-semibold tracking-[-0.02em] text-ink sm:text-[28px]">
-          Paste your JSON on both sides to compare
+          {t.tool.heading}
         </h2>
       </div>
-      <p class="text-[13px] text-mute">Runs entirely in this tab — nothing is uploaded.</p>
+      <p class="text-[13px] text-mute">{t.tool.note}</p>
     </div>
 
     <DiffChecker />

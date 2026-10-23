@@ -1,0 +1,43 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getLangFromUrl, useTranslatedPath } from '../i18n/utils';
+import type { LegalPage } from '../i18n/types';
+
+interface Props {
+  page: LegalPage;
+  email?: string;
+}
+
+const { page, email } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const tp = useTranslatedPath(lang);
+const contactUrl = tp('/contact-us');
+
+// Fill inline-HTML placeholders in body strings.
+function fill(html: string): string {
+  return html
+    .replaceAll('{contactUrl}', contactUrl)
+    .replaceAll('{email}', email ?? '');
+}
+---
+
+<PageLayout
+  title={page.metaTitle}
+  description={page.metaDescription}
+  eyebrow={page.eyebrow}
+  heading={page.heading}
+  updated={page.updated}
+  updatedLabel={page.lastUpdatedLabel}
+>
+  {
+    page.sections.map((section) => (
+      <>
+        {section.heading && <h2>{section.heading}</h2>}
+        {section.body.map((paragraph) => (
+          <p set:html={fill(paragraph)} />
+        ))}
+      </>
+    ))
+  }
+</PageLayout>

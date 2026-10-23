@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from './SiteHeader.astro';
+import Hero from './Hero.astro';
+import ToolSection from './ToolSection.astro';
+import Features from './Features.astro';
+import Privacy from './Privacy.astro';
+import About from './About.astro';
+import Faq from './Faq.astro';
+import SiteFooter from './SiteFooter.astro';
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+
+const title = t.meta.homeTitle;
+const description = t.meta.homeDescription;
+
+// Structured data. Names/descriptions are localized where it makes sense; the
+// question/answer text mirrors the on-page FAQ for the current language.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'JSON Diff Checker',
+  alternateName: ['JSON Diff Tool', 'JSON Comparison Tool', 'JSON Compare Tool'],
+  url: 'https://jsondiffchecker.com',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Any',
+  inLanguage: lang,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: t.meta.homeDescription,
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: lang,
+  mainEntity: t.faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+  <SiteHeader />
+  <main id="main-content">
+    <Hero />
+    <ToolSection />
+    <Features />
+    <Privacy />
+    <About />
+    <Faq />
+  </main>
+  <SiteFooter />
+</Layout>

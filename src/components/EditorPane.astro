@@ -1,31 +1,47 @@
 ---
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
 interface Props {
   side: 'left' | 'right';
   label: string;
   placeholder?: string;
 }
 
-const { side, label, placeholder = '{\n  "paste": "your JSON here"\n}' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const e = useContent(lang).editor;
+
+const { side, label, placeholder = e.editorPlaceholder } = Astro.props;
 ---
 
 <div class="flex min-h-0 flex-1 flex-col" data-pane={side}>
   <div class="flex flex-wrap items-center justify-between gap-2 border-b border-hairline bg-canvas-elevated px-3 py-2 sm:px-3">
     <div class="flex items-center gap-2">
       <span class="mono-eyebrow">{label}</span>
-      <span data-role="char-count" class="mono-eyebrow text-faint">0 chars</span>
+      <span data-role="char-count" class="mono-eyebrow text-faint">0 {e.chars}</span>
     </div>
     <div class="flex flex-wrap items-center gap-1.5">
-      <button type="button" class="btn-sm" data-action="format" title="Pretty-print">
-        Format
+      <button type="button" class="btn-sm" data-action="format" title={e.formatTitle}>
+        {e.format}
       </button>
-      <button type="button" class="btn-sm" data-action="upload" title="Upload a .json file">
-        Upload
+      <button type="button" class="btn-sm" data-action="upload" title={e.uploadTitle}>
+        {e.upload}
       </button>
-      <button type="button" class="btn-sm" data-action="load-url" title="Load JSON from a URL">
-        URL
+      <button type="button" class="btn-sm" data-action="load-url" title={e.urlTitle}>
+        {e.url}
       </button>
-      <button type="button" class="btn-sm" data-action="clear" title="Clear">
-        Clear
+      <button type="button" class="btn-sm" data-action="clear" title={e.clearTitle}>
+        {e.clear}
+      </button>
+      <button
+        type="button"
+        class="btn-sm"
+        data-action="expand"
+        title={e.expandTitle}
+        aria-label={`${e.expandTitle}: ${label}`}
+        aria-pressed="false"
+      >
+        <span data-role="expand-icon" aria-hidden="true">⤢</span>
       </button>
     </div>
   </div>
@@ -37,25 +53,25 @@ const { side, label, placeholder = '{\n  "paste": "your JSON here"\n}' } = Astro
     <input
       type="url"
       inputmode="url"
-      placeholder="https://example.com/data.json"
+      placeholder={e.urlPlaceholder}
       class="min-w-0 flex-1 basis-full rounded-sm border border-hairline bg-canvas-elevated px-2 py-1.5 font-mono text-sm text-ink placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-link sm:basis-0"
       data-role="url-input"
-      aria-label={`Load JSON URL into ${label}`}
+      aria-label={`${e.urlTitle}: ${label}`}
     />
-    <button type="button" class="btn-sm-primary btn-sm" data-action="fetch-url">Load</button>
-    <button type="button" class="btn-sm" data-action="cancel-url">Cancel</button>
+    <button type="button" class="btn-sm-primary btn-sm" data-action="fetch-url">{e.load}</button>
+    <button type="button" class="btn-sm" data-action="cancel-url">{e.cancel}</button>
   </div>
 
   <input type="file" accept=".json,application/json" class="hidden" data-role="file-input" />
 
-  <div class="relative flex min-h-0 flex-1">
+  <div class="relative flex min-h-[280px] flex-1 md:min-h-0">
     <textarea
-      class="min-h-0 w-full flex-1 resize-none bg-canvas-elevated px-4 py-3 font-mono text-[13px] leading-[20px] text-ink placeholder:text-faint focus:outline-none"
+      class="min-h-0 w-full flex-1 resize-none overflow-auto bg-canvas-elevated px-4 py-3 font-mono text-[13px] leading-[20px] text-ink placeholder:text-faint focus:outline-none"
       spellcheck="false"
       autocomplete="off"
       autocapitalize="off"
       data-role="editor"
-      aria-label={`${label} JSON input`}
+      aria-label={label}
       placeholder={placeholder}></textarea>
   </div>
 

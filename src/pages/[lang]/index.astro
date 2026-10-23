@@ -1,0 +1,12 @@
+---
+import HomePage from '../../components/HomePage.astro';
+import { languages, defaultLang, type Lang } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return (Object.keys(languages) as Lang[])
+    .filter((lang) => lang !== defaultLang)
+    .map((lang) => ({ params: { lang } }));
+}
+---
+
+<HomePage />

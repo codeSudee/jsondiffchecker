@@ -129,6 +129,39 @@ function setupPaneInteractions(pane: PaneState, onChange: () => void) {
     pane.urlInput.focus();
   });
 
+  const expandBtn = pane.root.querySelector<HTMLElement>('[data-action="expand"]');
+  const expandIcon = pane.root.querySelector<HTMLElement>('[data-role="expand-icon"]');
+  const FULLSCREEN_CLASSES = ['fixed', 'inset-0', 'z-50', 'bg-canvas-elevated'];
+
+  function setExpanded(expanded: boolean) {
+    if (expanded) {
+      pane.root.classList.add(...FULLSCREEN_CLASSES);
+      document.body.classList.add('overflow-hidden');
+      expandBtn?.setAttribute('aria-pressed', 'true');
+      expandBtn?.setAttribute('title', 'Collapse editor');
+      if (expandIcon) expandIcon.textContent = '⤡';
+    } else {
+      pane.root.classList.remove(...FULLSCREEN_CLASSES);
+      document.body.classList.remove('overflow-hidden');
+      expandBtn?.setAttribute('aria-pressed', 'false');
+      expandBtn?.setAttribute('title', 'Expand editor');
+      if (expandIcon) expandIcon.textContent = '⤢';
+    }
+    pane.editor.focus();
+  }
+
+  expandBtn?.addEventListener('click', () => {
+    const isExpanded = expandBtn.getAttribute('aria-pressed') === 'true';
+    setExpanded(!isExpanded);
+  });
+
+  pane.editor.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && expandBtn?.getAttribute('aria-pressed') === 'true') {
+      e.preventDefault();
+      setExpanded(false);
+    }
+  });
+
   pane.root.querySelector('[data-action="cancel-url"]')?.addEventListener('click', () => {
     pane.urlBar.classList.add('hidden');
     pane.urlBar.classList.remove('flex');

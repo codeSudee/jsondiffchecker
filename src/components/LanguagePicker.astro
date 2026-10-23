@@ -1,0 +1,97 @@
+---
+import { languages, type Lang } from '../i18n/ui';
+import { getLangFromUrl, useTranslatedPath, getPathWithoutLang } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+interface Props {
+  variant?: 'header' | 'footer';
+}
+
+const { variant = 'header' } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+// Keep the visitor on the same logical page when switching languages.
+const logicalPath = getPathWithoutLang(Astro.url);
+---
+
+<div class="relative" data-role="lang-picker">
+  <button
+    type="button"
+    class="inline-flex h-9 items-center gap-1.5 rounded-full border border-hairline px-3 text-[13px] text-body hover:bg-hairline-soft hover:text-ink"
+    data-action="toggle-lang"
+    aria-label={t.nav.languageLabel}
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+    <span>{languages[lang]}</span>
+    <svg class="h-3.5 w-3.5 text-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m6 9 6 6 6-6"></path>
+    </svg>
+  </button>
+  <div
+    class={`absolute z-30 mt-1 hidden max-h-72 w-40 flex-col overflow-auto rounded-sm border border-hairline bg-canvas-elevated floating-shadow ${variant === 'footer' ? 'bottom-full mb-1 left-0' : 'right-0 top-full'}`}
+    data-role="lang-menu"
+    role="menu"
+  >
+    {
+      (Object.entries(languages) as [Lang, string][]).map(([code, label]) => {
+        const translatePath = useTranslatedPath(code);
+        const href = translatePath(logicalPath);
+        const isCurrent = code === lang;
+        return (
+          <a
+            href={href}
+            class={`px-3 py-2 text-left text-[13px] hover:bg-hairline-soft ${isCurrent ? 'font-semibold text-ink' : 'text-body'}`}
+            role="menuitem"
+            hreflang={code}
+            lang={code}
+            aria-current={isCurrent ? 'true' : undefined}
+          >
+            {label}
+          </a>
+        );
+      })
+    }
+  </div>
+</div>
+
+<script>
+  function initLangPickers() {
+    document.querySelectorAll<HTMLElement>('[data-role="lang-picker"]').forEach((picker) => {
+      const btn = picker.querySelector<HTMLElement>('[data-action="toggle-lang"]');
+      const menu = picker.querySelector<HTMLElement>('[data-role="lang-menu"]');
+      if (!btn || !menu) return;
+
+      function setOpen(open: boolean) {
+        menu?.classList.toggle('hidden', !open);
+        menu?.classList.toggle('flex', open);
+        btn?.setAttribute('aria-expanded', String(open));
+      }
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setOpen(menu.classList.contains('hidden'));
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!picker.contains(e.target as Node)) setOpen(false);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLangPickers);
+  } else {
+    initLangPickers();
+  }
+</script>

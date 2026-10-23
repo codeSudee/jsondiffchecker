@@ -1,38 +1,18 @@
 ---
-const features = [
-  {
-    title: 'Line-accurate error messages',
-    body: "Invalid JSON? You get the exact line and column, not a vague failure. Fix mistakes in seconds instead of hunting through minified text.",
-  },
-  {
-    title: 'Upload, paste, or load from a URL',
-    body: 'Drop in a .json file, paste raw text, or pull a document straight from an API endpoint — whichever is fastest for your workflow.',
-  },
-  {
-    title: 'Diff summary & keyboard navigation',
-    body: 'See counts of added, removed, and changed keys at a glance, then jump between them with Enter / Shift+Enter without touching the mouse.',
-  },
-  {
-    title: 'Deeply nested, without breaking layout',
-    body: 'Collapsible tree nodes keep huge, deeply nested payloads readable instead of producing a mile-long unreadable page.',
-  },
-  {
-    title: 'Copy a path, not just a value',
-    body: 'Click any diff row to copy its JSON Pointer path — perfect for pasting into bug reports or tracking down the field in your codebase.',
-  },
-  {
-    title: 'Export as JSON Patch or Markdown',
-    body: 'Download the diff as a standard RFC 6902 JSON Patch for tooling, or as a clean Markdown changelog for pull requests and docs.',
-  },
-];
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+const features = t.features.items;
 ---
 
 <section id="features" class="border-b border-hairline bg-canvas py-20 sm:py-28">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="mono-eyebrow mb-3">Features</p>
+      <p class="mono-eyebrow mb-3">{t.features.eyebrow}</p>
       <h2 class="text-[28px] font-semibold tracking-[-0.03em] text-ink sm:text-[36px]">
-        Everything you need, nothing you don't
+        {t.features.heading}
       </h2>
     </div>
 

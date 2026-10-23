@@ -1,0 +1,17 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { languages, defaultLang, type Lang } from '../../i18n/ui';
+import { getLangFromUrl } from '../../i18n/utils';
+import { useContent } from '../../i18n/content';
+
+export function getStaticPaths() {
+  return (Object.keys(languages) as Lang[])
+    .filter((lang) => lang !== defaultLang)
+    .map((lang) => ({ params: { lang } }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+---
+
+<LegalPage page={t.contact_us} email={t.contact_us.email} />

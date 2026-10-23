@@ -1,49 +1,54 @@
 ---
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const d = useContent(lang).diffPanel;
 ---
 
 <div class="flex min-h-0 flex-1 flex-col border-t border-hairline" data-role="diff-panel">
   <div class="flex flex-wrap items-center justify-between gap-3 border-b border-hairline bg-canvas-elevated px-4 py-2.5">
     <div class="flex items-center gap-4">
-      <span class="mono-eyebrow">Diff result</span>
+      <span class="mono-eyebrow">{d.resultLabel}</span>
       <div class="flex items-center gap-3 text-[13px]" data-role="diff-stats" aria-live="polite" aria-atomic="true">
         <span class="flex items-center gap-1.5 text-diff-added">
           <span class="inline-block h-2 w-2 rounded-full bg-diff-added" aria-hidden="true"></span>
-          <span data-role="stat-added">0</span> added
+          <span data-role="stat-added">0</span> {d.added}
         </span>
         <span class="flex items-center gap-1.5 text-diff-removed">
           <span class="inline-block h-2 w-2 rounded-full bg-diff-removed" aria-hidden="true"></span>
-          <span data-role="stat-removed">0</span> removed
+          <span data-role="stat-removed">0</span> {d.removed}
         </span>
         <span class="flex items-center gap-1.5 text-diff-changed">
           <span class="inline-block h-2 w-2 rounded-full bg-diff-changed" aria-hidden="true"></span>
-          <span data-role="stat-changed">0</span> changed
+          <span data-role="stat-changed">0</span> {d.changed}
         </span>
       </div>
     </div>
     <div class="flex flex-wrap items-center gap-1.5">
-      <label class="flex items-center gap-1.5 pr-1 text-[13px] text-body" title="Match array elements by value/identity instead of position">
+      <label class="flex items-center gap-1.5 pr-1 text-[13px] text-body" title={d.ignoreArrayOrderTitle}>
         <input
           type="checkbox"
           class="h-3.5 w-3.5 rounded-sm border-hairline text-link focus:outline-none focus:ring-2 focus:ring-link"
           data-role="ignore-array-order"
         />
-        <span class="hidden sm:inline">Ignore array order</span>
-        <span class="sm:hidden">Ignore order</span>
+        <span class="hidden sm:inline">{d.ignoreArrayOrder}</span>
+        <span class="sm:hidden">{d.ignoreArrayOrderShort}</span>
       </label>
       <div class="mx-1 hidden h-4 w-px bg-hairline sm:block"></div>
-      <button type="button" class="btn-sm" data-action="prev-diff" title="Previous difference (Shift+Enter)">
-        <span aria-hidden="true">↑</span> Prev
+      <button type="button" class="btn-sm" data-action="prev-diff" title={d.prevTitle}>
+        <span aria-hidden="true">↑</span> {d.prev}
       </button>
-      <button type="button" class="btn-sm" data-action="next-diff" title="Next difference (Enter)">
-        <span aria-hidden="true">↓</span> Next
+      <button type="button" class="btn-sm" data-action="next-diff" title={d.nextTitle}>
+        <span aria-hidden="true">↓</span> {d.next}
       </button>
       <div class="mx-1 hidden h-4 w-px bg-hairline sm:block"></div>
-      <button type="button" class="btn-sm" data-action="copy-diff" title="Copy diff as JSON Patch">
-        Copy
+      <button type="button" class="btn-sm" data-action="copy-diff" title={d.copyTitle}>
+        {d.copy}
       </button>
       <div class="relative">
-        <button type="button" class="btn-sm" data-action="download-menu-toggle" title="Download diff" aria-haspopup="true" aria-expanded="false">
-          Download <span aria-hidden="true">⌄</span>
+        <button type="button" class="btn-sm" data-action="download-menu-toggle" title={d.downloadTitle} aria-haspopup="true" aria-expanded="false">
+          {d.download} <span aria-hidden="true">⌄</span>
         </button>
         <div
           class="absolute right-0 top-full z-10 mt-1 hidden w-44 flex-col overflow-hidden rounded-sm border border-hairline bg-canvas-elevated floating-shadow"
@@ -51,10 +56,10 @@
           role="menu"
         >
           <button type="button" class="px-3 py-2 text-left text-[13px] hover:bg-hairline-soft" data-action="download-patch" role="menuitem">
-            JSON Patch (.json)
+            {d.downloadPatch}
           </button>
           <button type="button" class="px-3 py-2 text-left text-[13px] hover:bg-hairline-soft" data-action="download-markdown" role="menuitem">
-            Markdown changelog (.md)
+            {d.downloadMarkdown}
           </button>
         </div>
       </div>
@@ -65,7 +70,7 @@
     <div class="flex h-full items-center justify-center p-6 text-center sm:p-10" data-role="diff-empty">
       <div class="max-w-sm">
         <p class="text-[14px] text-mute">
-          Paste or load JSON into both panes above to see the diff here.
+          {d.emptyState}
         </p>
       </div>
     </div>

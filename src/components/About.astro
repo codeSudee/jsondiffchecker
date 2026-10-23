@@ -1,82 +1,21 @@
 ---
+import { getLangFromUrl } from '../i18n/utils';
+import { useContent } from '../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useContent(lang);
+const a = t.about;
 ---
 
 <section id="about" class="border-b border-hairline bg-canvas py-20 sm:py-28">
   <div class="mx-auto max-w-3xl px-4 sm:px-6">
-    <p class="mono-eyebrow mb-3">About the tool</p>
+    <p class="mono-eyebrow mb-3">{a.eyebrow}</p>
     <h2 class="text-[28px] font-semibold tracking-[-0.03em] text-ink sm:text-[36px]">
-      A free JSON diff checker built for speed and privacy
+      {a.heading}
     </h2>
 
     <div class="mt-6 space-y-5 text-[15px] leading-relaxed text-body">
-      <p>
-        JSON Diff Checker is a free <strong class="text-ink">JSON diff checker online</strong> that lets you
-        compare two JSON files or objects and instantly see what changed. Paste your data, upload files, or
-        load JSON straight from a URL, and this <strong class="text-ink">json diff tool</strong> highlights every
-        added key, removed key, and changed value in a clean, color-coded tree — no installation, no account,
-        and no data ever leaving your browser.
-      </p>
-
-      <p>
-        Most teams need to <strong class="text-ink">compare json online</strong> at some point — checking an API
-        response against a fixture, reviewing a config change before a deploy, or tracking down why two payloads
-        that "should" be identical actually aren't. Doing this by eye in a text editor is slow and error-prone,
-        especially with deeply nested objects or large arrays. This <strong class="text-ink">json comparison tool</strong>
-        does the matching for you: keys are compared semantically rather than as raw text, so reordering keys
-        inside an object never produces a false difference. If you need to <strong class="text-ink">compare two json
-        files</strong> that only differ in formatting or key order, the diff stays focused on changes that
-        actually matter.
-      </p>
-
-      <p>
-        Arrays get the same careful treatment. By default, order matters — comparing
-        <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">["a","b"]</code> against
-        <code class="rounded-sm bg-hairline-soft px-1.5 py-0.5 font-mono text-[13px]">["b","a"]</code> is reported as
-        a change, since sequence often carries real meaning. But when you just need to
-        <strong class="text-ink">compare json objects online</strong> without caring about array order, flip on
-        "Ignore array order" and the tool matches array elements by an id/key field when one exists, or by value
-        otherwise — so shuffled lists no longer show as noisy false positives. That makes this
-        <strong class="text-ink">json diff viewer</strong> reliable for real-world API responses, where array
-        ordering is frequently inconsistent between requests.
-      </p>
-
-      <p>
-        As a <strong class="text-ink">free json diff checker</strong>, there's no paywall, no usage limit, and no
-        watermark on exported results. Unlike many "free" tools online that quietly send your data to a server for
-        processing, everything here runs client-side with plain JavaScript — open your browser's developer tools
-        and watch the Network tab while you compare data, and you'll see nothing leave the page. That makes it
-        safe to use as a <strong class="text-ink">json diff checker online free</strong> even with sensitive
-        payloads: API tokens in test fixtures, internal config, or customer data you'd never want touching a
-        third-party server.
-      </p>
-
-      <p>
-        Beyond a basic <strong class="text-ink">json compare tool</strong>, this app is built to handle real
-        production use cases. Invalid input doesn't just fail silently — you get the exact line and column where
-        parsing broke, so fixing a missing comma or an unquoted key takes seconds instead of a manual scan through
-        minified text. When you need to <strong class="text-ink">compare json files online</strong> that are large
-        or deeply nested, the diff renders as a collapsible tree so the page stays readable and responsive instead
-        of turning into a mile-long wall of text. Keyboard shortcuts let you jump between differences with Enter
-        and Shift+Enter, and clicking any row copies its JSON Pointer path for pasting straight into a bug report
-        or pull request.
-      </p>
-
-      <p>
-        This is also a practical <strong class="text-ink">json diff generator</strong> for documentation and code
-        review workflows. Once you've found the differences, export them instead of just reading them: copy the
-        result as a standards-compliant JSON Patch (RFC 6902) for automated tooling, or download a clean Markdown
-        changelog that's ready to drop into a pull request description. Combined with support for loading JSON
-        directly from a URL, it works as a lightweight <strong class="text-ink">online json comparison</strong> and
-        <strong class="text-ink">json diff and merge tool</strong> for checking two live endpoints against each
-        other without downloading anything first.
-      </p>
-
-      <p>
-        Whether you need to <strong class="text-ink">compare json data</strong> for a one-off debugging session or
-        you reach for a <strong class="text-ink">json difference checker</strong> regularly as part of your
-        development workflow, this tool is designed to be fast to open, obvious to use, and safe by default —
-        every comparison happens locally, every time, for free.
-      </p>
+      {a.paragraphs.map((p) => <p set:html={p} />)}
     </div>
   </div>
 </section>
