@@ -1,0 +1,43 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { changelog, lastUpdated } from '../data/changelog';
+
+const fmt = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString('en', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+---
+
+<PageLayout
+  title="Changelog | JSON Diff Checker"
+  description="A dated list of changes to JSON Diff Checker: new features, content updates, and policy changes."
+  eyebrow="Changelog"
+  heading="What has changed"
+  updated={fmt(lastUpdated)}
+  englishOnly
+>
+  <p>
+    A running record of changes to the tool and the site, newest first. If something here affects
+    your data or privacy, it is also reflected in the
+    <a href="/privacy-policy">Privacy Policy</a>. To report a bug or suggest a change, use the
+    <a href="/contact-us">contact page</a>.
+  </p>
+  {
+    changelog.map((entry) => (
+      <>
+        <h2>
+          <time datetime={entry.date} class="mr-2 font-mono text-[13px] font-normal text-mute">{fmt(entry.date)}</time>
+          {entry.title}
+        </h2>
+        <ul>
+          {entry.changes.map((c) => (
+            <li>{c}</li>
+          ))}
+        </ul>
+      </>
+    ))
+  }
+</PageLayout>

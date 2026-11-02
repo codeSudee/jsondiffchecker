@@ -2,9 +2,17 @@
 import DiffChecker from './DiffChecker.astro';
 import { getLangFromUrl } from '../i18n/utils';
 import { useContent } from '../i18n/content';
+import { lastUpdated } from '../data/changelog';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useContent(lang);
+const updatedLabel = t.about_us.lastUpdatedLabel;
+const updatedText = new Date(`${lastUpdated}T00:00:00Z`).toLocaleDateString(lang, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
 ---
 
 <section id="tool" class="bg-canvas py-14 sm:py-20">
@@ -16,7 +24,13 @@ const t = useContent(lang);
           {t.tool.heading}
         </h2>
       </div>
-      <p class="text-[13px] text-mute">{t.tool.note}</p>
+      <div class="text-[13px] text-mute sm:text-right">
+        <p>{t.tool.note}</p>
+        <p class="mt-1">
+          {updatedLabel} <time datetime={lastUpdated}>{updatedText}</time>
+          {lang === 'en' && <> · <a href="/changelog" class="underline underline-offset-2 hover:text-ink">Changelog</a></>}
+        </p>
+      </div>
     </div>
 
     <DiffChecker />

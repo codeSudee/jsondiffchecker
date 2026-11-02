@@ -13,6 +13,8 @@ interface Props {
   description?: string;
   ogImage?: string;
   noindex?: boolean;
+  /** Page exists only in the default language: skip hreflang alternates. */
+  englishOnly?: boolean;
   breadcrumbs?: { name: string; path: string }[];
 }
 
@@ -21,6 +23,7 @@ const {
   description = 'Free JSON diff checker to compare two JSON files or objects online. Our JSON comparison tool highlights added, removed, and changed keys instantly — no upload, no sign-up, 100% private in your browser.',
   ogImage = '/og-image.png',
   noindex = false,
+  englishOnly = false,
   breadcrumbs,
 } = Astro.props;
 
@@ -91,10 +94,10 @@ const xDefaultHref = new URL(useTranslatedPath(defaultLang)(logicalPath), Astro.
 		<meta name="apple-mobile-web-app-title" content="JSON Diff" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<link rel="canonical" href={canonicalURL} />
-		{alternates.map((alt) => (
+		{!englishOnly && alternates.map((alt) => (
 			<link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
 		))}
-		<link rel="alternate" hreflang="x-default" href={xDefaultHref} />
+		{!englishOnly && <link rel="alternate" hreflang="x-default" href={xDefaultHref} />}
 		<meta name="generator" content={Astro.generator} />
 
 		<title>{title}</title>

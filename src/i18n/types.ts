@@ -109,6 +109,26 @@ export interface GuideContent {
   exampleOutro: string;
 }
 
+export interface ErrorsGuideItem {
+  title: string;
+  body: string;
+  leftJson: string;
+  rightJson: string;
+  result: string;
+}
+
+/** English-only for now; other languages omit it and the section is not rendered. */
+export interface ErrorsGuideContent {
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  items: ErrorsGuideItem[];
+  leftLabel: string;
+  rightLabel: string;
+  resultLabel: string;
+  outro: string;
+}
+
 export interface UseCase {
   title: string;
   body: string;
@@ -180,6 +200,8 @@ export interface FooterContent {
   contactUs: string;
   privacyPolicy: string;
   terms: string;
+  changelog?: string;
+  commonErrors?: string;
   copyright: string; // may contain {year} placeholder
 }
 
@@ -213,6 +235,7 @@ export interface SiteContent {
   privacy: PrivacySectionContent;
   about: AboutContent;
   guide: GuideContent;
+  errorsGuide?: ErrorsGuideContent;
   useCases: UseCasesContent;
   faq: FaqContent;
   editor: EditorContent;

@@ -12,7 +12,10 @@ const { variant = 'header' } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useContent(lang);
 // Keep the visitor on the same logical page when switching languages.
-const logicalPath = getPathWithoutLang(Astro.url);
+// English-only pages (the changelog) fall back to the localized homepage.
+const englishOnlyPaths = ['/changelog'];
+const rawLogicalPath = getPathWithoutLang(Astro.url);
+const logicalPath = englishOnlyPaths.some((p) => rawLogicalPath.startsWith(p)) ? '/' : rawLogicalPath;
 ---
 
 <div class="relative" data-role="lang-picker">

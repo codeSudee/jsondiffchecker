@@ -34,6 +34,7 @@ const copyright = f.copyright.replace('{year}', String(year));
             <li><a href={tp('/#features')} class="hover:text-ink">{f.features}</a></li>
             <li><a href={tp('/#privacy')} class="hover:text-ink">{f.privacy}</a></li>
             <li><a href={tp('/#faq')} class="hover:text-ink">{f.faq}</a></li>
+            {f.commonErrors && lang === 'en' && <li><a href="/#common-errors" class="hover:text-ink">{f.commonErrors}</a></li>}
           </ul>
         </div>
         <div>
@@ -50,6 +51,7 @@ const copyright = f.copyright.replace('{year}', String(year));
             <li><a href={tp('/contact-us')} class="hover:text-ink">{f.contactUs}</a></li>
             <li><a href={tp('/privacy-policy')} class="hover:text-ink">{f.privacyPolicy}</a></li>
             <li><a href={tp('/terms-and-conditions')} class="hover:text-ink">{f.terms}</a></li>
+            {f.changelog && lang === 'en' && <li><a href="/changelog" class="hover:text-ink">{f.changelog}</a></li>}
           </ul>
         </div>
       </div>

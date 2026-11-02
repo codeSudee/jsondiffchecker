@@ -144,6 +144,67 @@ export const en: SiteContent = {
     exampleOutro:
       '"service" and "replicas" are identical on both sides, so they render as plain, unhighlighted rows — the diff only draws attention to what actually changed. With "Ignore array order" off, the new region is treated as an appended array element rather than a reordering, since it was added at the end.',
   },
+  errorsGuide: {
+    eyebrow: 'Troubleshooting',
+    heading: 'Common JSON errors and how diffing helps catch them',
+    intro:
+      'Most "the payload looks the same but the code breaks" bugs come from a handful of small mistakes. Some stop the JSON from parsing at all; others parse fine but change what the data means. Here is how each one shows up in the tool.',
+    leftLabel: 'Before',
+    rightLabel: 'After',
+    resultLabel: 'What the tool reports',
+    items: [
+      {
+        title: 'Trailing commas',
+        body: 'A comma after the last item in an object or array is legal in JavaScript but invalid in JSON. It usually sneaks in when someone deletes the last line of a config and leaves the comma on the line above. The parser rejects the whole document, so nothing downstream can read it.',
+        leftJson: '{\n  "retries": 3,\n  "timeout": 30,\n}',
+        rightJson: '{\n  "retries": 3,\n  "timeout": 30\n}',
+        result:
+          'The left editor shows a parse error ("Expected double-quoted property name") at line 4, column 1: the closing brace where the parser expected another key after the comma. Remove the comma and the diff runs; until then the tool cannot compare the two sides, because invalid JSON has no structure to compare.',
+      },
+      {
+        title: 'Unquoted or single-quoted keys',
+        body: 'JSON requires double quotes around every key and string. {id: 1} and {\'id\': 1} are valid JavaScript object literals, so they are easy to paste from a console log or a code sample, but neither is valid JSON.',
+        leftJson: "{\n  id: 42,\n  \"name\": \"Ada\"\n}",
+        rightJson: '{\n  "id": 42,\n  "name": "Ada"\n}',
+        result:
+          'The left side fails to parse at line 2, column 3, where the unquoted key starts, and the error is shown under the editor. After you add the quotes the two sides are identical and the tool reports no differences.',
+      },
+      {
+        title: 'Type mismatches: "5" versus 5',
+        body: 'A number serialized as a string is one of the most common causes of subtle API bugs. The values look the same in a log, but strict equality checks, sorting and database writes treat them differently. This often appears after a serializer or a database driver is upgraded.',
+        leftJson: '{\n  "id": 1042,\n  "active": true,\n  "price": 19.99\n}',
+        rightJson: '{\n  "id": "1042",\n  "active": "true",\n  "price": 19.99\n}',
+        result:
+          'Two rows are reported as changed: id (1042 → "1042") and active (true → "true"). price is untouched. Comparison is by value and type, so a string never equals the number or boolean it resembles.',
+      },
+      {
+        title: 'Null versus a missing key',
+        body: 'The two look similar to a human but mean different things to code. "middleName": null says the field exists and is empty; leaving the key out says nothing about it. Some APIs treat them differently when applying partial updates, and some clients crash on one but not the other.',
+        leftJson: '{\n  "name": "Ada",\n  "middleName": null\n}',
+        rightJson: '{\n  "name": "Ada"\n}',
+        result:
+          'middleName is reported as removed: it exists on the left and is absent on the right. If instead the right side had "middleName": "Byron", it would be reported as changed (null → "Byron").',
+      },
+      {
+        title: 'Missing or renamed keys',
+        body: 'A field renamed in a refactor (userId to user_id) or dropped by a new API version breaks every consumer that still reads the old name. It is hard to spot by eye in a response with dozens of fields.',
+        leftJson: '{\n  "userId": 7,\n  "email": "a@example.com"\n}',
+        rightJson: '{\n  "user_id": 7,\n  "email": "a@example.com"\n}',
+        result:
+          'userId is reported as removed and user_id as added. The tool does not guess that they are the same field, so a rename always appears as one removal plus one addition. email is identical and stays unhighlighted.',
+      },
+      {
+        title: 'Reordered arrays',
+        body: 'Arrays are ordered, so two responses that contain the same items in a different sequence are genuinely different documents. Sometimes that matters (steps in a pipeline) and sometimes it is only noise (a set of tags returned in no guaranteed order).',
+        leftJson: '{\n  "tags": ["api", "beta", "billing"]\n}',
+        rightJson: '{\n  "tags": ["billing", "api", "beta"]\n}',
+        result:
+          'By default, each position is compared on its own, so tags[0], tags[1] and tags[2] are all reported as changed. Turn on "Ignore array order" and the arrays match, with no differences reported. Leave it off when order carries meaning.',
+      },
+    ],
+    outro:
+      'Note the difference between the first two items and the rest. Syntax errors are caught before any comparison happens. The other four parse successfully, so only a structural diff will show them to you. That is why comparing a known-good document against a failing one is often the quickest way to find a bug that no validator will flag.',
+  },
   useCases: {
     eyebrow: 'Use cases',
     heading: 'What developers use it for',
@@ -271,6 +332,8 @@ export const en: SiteContent = {
     contactUs: 'Contact us',
     privacyPolicy: 'Privacy policy',
     terms: 'Terms and conditions',
+    changelog: 'Changelog',
+    commonErrors: 'Common JSON errors',
     copyright: '© {year} JSON Diff Checker. All processing happens locally in your browser.',
   },
   about_us: {

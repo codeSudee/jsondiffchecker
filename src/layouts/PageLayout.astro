@@ -13,6 +13,7 @@ interface Props {
   updated?: string;
   updatedLabel?: string;
   noindex?: boolean;
+  englishOnly?: boolean;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   updated,
   updatedLabel = 'Last updated:',
   noindex = false,
+  englishOnly = false,
 } = Astro.props;
 
 const t = useContent(getLangFromUrl(Astro.url));
@@ -32,7 +34,7 @@ const breadcrumbs = [
 ];
 ---
 
-<Layout title={title} description={description} noindex={noindex} breadcrumbs={breadcrumbs}>
+<Layout title={title} description={description} noindex={noindex} englishOnly={englishOnly} breadcrumbs={breadcrumbs}>
   <SiteHeader />
   <main id="main-content">
     <section class="border-b border-hairline bg-canvas py-16 sm:py-20">
