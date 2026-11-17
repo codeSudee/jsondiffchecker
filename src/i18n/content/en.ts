@@ -363,6 +363,12 @@ export const en: SiteContent = {
         ],
       },
       {
+        heading: 'Other free tools we make',
+        body: [
+          'Need placeholder copy for a mockup, a UI test, or sample string values in a JSON fixture? Our <a href="https://loremmaker.com/">Lorem Maker lorem ipsum generator</a> creates paragraphs, sentences, words, or an exact character count, and like this tool it runs entirely in your browser.',
+        ],
+      },
+      {
         heading: 'Contact',
         body: [
           'Have feedback, found a bug, or want to suggest a feature? Visit our <a href="{contactUrl}">Contact Us</a> page to get in touch.',
